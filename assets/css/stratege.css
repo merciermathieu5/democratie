@@ -158,6 +158,26 @@ header.tete .sous{font-family:var(--corps);letter-spacing:.02em;font-size:14.5px
   background:#fbeae6;color:#7a2117;font-weight:600;line-height:1.5}
 @media(prefers-reduced-motion:reduce){ .revolte-banner{animation:none} }
 
+/* ===== indicateurs de trajectoire (sous les décisions) ===== */
+.axes{margin-top:16px;display:flex;flex-direction:column;gap:13px;
+  padding:13px 15px 15px;background:rgba(251,247,239,.72);
+  border:1.5px solid var(--pierre-bord);border-radius:var(--rayon)}
+.axes-tete{font-family:var(--display,var(--corps));font-size:12.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--encre-doux);font-weight:700;margin-bottom:1px}
+.axe-poles{display:flex;justify-content:space-between;font-size:12px;
+  letter-spacing:.04em;font-weight:700;margin-bottom:5px}
+.axe-pole-g{color:var(--pompei)} .axe-pole-d{color:var(--olive)}
+.axe-rail{position:relative;height:9px;border-radius:5px;
+  border:1px solid var(--pierre-bord)}
+.axe-rail.dem{background:linear-gradient(90deg,var(--pompei),var(--pierre-bord) 50%,var(--olive))}
+.axe-rail.lib{background:linear-gradient(90deg,var(--pompei),var(--pierre-bord) 50%,var(--olive))}
+.axe-marqueur{position:absolute;top:50%;width:17px;height:17px;border-radius:50%;
+  background:var(--parchemin);border:3px solid var(--encre);
+  transform:translate(-50%,-50%);box-shadow:0 1px 3px rgba(58,46,38,.32);
+  transition:left .45s cubic-bezier(.2,.7,.2,1)}
+@media(prefers-reduced-motion:reduce){ .axe-marqueur{transition:none} }
+
+
 /* ===== document source (à consulter avant de décider) ===== */
 .source{margin:16px 0 6px;background:#F3E9D2;border:2px solid #C9B98F;border-left:6px solid var(--bronze);
   border-radius:8px;padding:13px 15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}

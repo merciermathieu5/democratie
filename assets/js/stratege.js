@@ -15,7 +15,7 @@
     piece:'<circle cx="12" cy="12" r="9" fill="#3A2E26"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="#F2E7CF" stroke-width="1.1"/><path d="M13.5 8.5 C10 8 9.5 11 12 11.6 C14.5 12.2 14 15.4 10.6 15" fill="none" stroke="#F2E7CF" stroke-width="1.3" stroke-linecap="round"/>'
   };
 
-  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, DIFF;
+  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, finForcee, DIFF;
   var GEN_VERROU=0;   // jeton de génération : invalide un compte à rebours quand la scène change
   var journal=[];     // journal du mandat : une entrée par décision (pour le bilan de fin)
   var aConnuRevolte=false;  // au moins une révolte a éclaté durant le mandat ?
@@ -28,7 +28,7 @@
     return (G.difficultes && G.difficultes[G.difficultes.defaut||"legat"]) ||
            { nom:"Légat", seuilRevolte:30, seuilPaix:42, attenuation:0.5, bleed:2, revenuMod:1, malusActeMod:1 };
   }
-  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
+  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; finForcee=null; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
 
   function el(s){ return document.querySelector(s); }
   function creer(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
@@ -84,11 +84,32 @@
     });
   }
 
+  /* ---------- indicateurs de trajectoire (sous les décisions) ---------- */
+  // Deux axes de lecture : régime (oligarchie ↔ démocratie) et indépendance (soumission ↔ liberté).
+  function unAxe(gauche, droite, val, cls){
+    var a=creer("div","axe");
+    var poles=creer("div","axe-poles");
+    poles.appendChild(creer("span","axe-pole-g",esc(gauche)));
+    poles.appendChild(creer("span","axe-pole-d",esc(droite)));
+    a.appendChild(poles);
+    var rail=creer("div","axe-rail "+cls);
+    var marq=creer("div","axe-marqueur"); marq.style.left=clamp(val,0,100)+"%";
+    rail.appendChild(marq); a.appendChild(rail);
+    return a;
+  }
+  function rendreAxes(){
+    var box=creer("div","axes");
+    box.appendChild(creer("div","axes-tete","Où mène ton gouvernement ?"));
+    box.appendChild(unAxe("Oligarchie","Démocratie", etat.romanisation, "dem"));
+    box.appendChild(unAxe("Soumission","Liberté", (etat.liberte!=null?etat.liberte:50), "lib"));
+    return box;
+  }
+
   /* ---------- effets ---------- */
   function appliquer(eff){ var d={}; Object.keys(eff||{}).forEach(function(k){ var a=etat[k];
     etat[k]=(k==="tresor")?Math.max(0,etat[k]+eff[k]):clamp(etat[k]+eff[k],0,100); d[k]=etat[k]-a; }); return d; }
   function fusion(a,b){ var r=Object.assign({},a); Object.keys(b||{}).forEach(function(k){ r[k]=(r[k]||0)+b[k]; }); return r; }
-  function gameOver(){ if(faillite)return "tresor"; if(etat.stabilite<=0)return "stabilite"; if(etat.faveur<=0)return "faveur"; if(etat.romanisation<=0)return "romanisation"; return null; }
+  function gameOver(){ if(faillite)return "tresor"; if(etat.stabilite<=0)return "stabilite"; if(etat.faveur<=0)return "faveur"; if(etat.romanisation<=0)return "romanisation"; if(etat.liberte<=0)return "soumission"; return null; }
   function estPositif(d){ var s=0; Object.keys(d).forEach(function(k){ if(k!=="tresor")s+=d[k]; }); return s>=0; }
 
   /* ---------- révolte (niveau de difficulté) ---------- */
@@ -365,6 +386,7 @@
     var verrou=ms>0 ? noteDeLecture(ms) : null;
     if(verrou) bas.appendChild(verrou);
     bas.appendChild(liste);
+    bas.appendChild(rendreAxes());
 
     rendreJauges(malus);
     rendreScene({ perso:e.perso, expr:e.expr, ambiance:e.ambiance, nom:e.nom,
@@ -429,9 +451,9 @@
     if(b) setTimeout(function(){ try{ b.focus(); }catch(e){} }, 30);
   }
   function chipsDeltas(deltas){
-    var noms={romanisation:"Démocratie",stabilite:"Paix sociale",faveur:"Soutien du peuple",tresor:"Trésor de la cité"};
+    var noms={romanisation:"Démocratie",stabilite:"Paix sociale",faveur:"Soutien du peuple",tresor:"Trésor de la cité",liberte:"Liberté"};
     var wrap=creer("div","modal-deltas"); var any=false;
-    ["romanisation","stabilite","faveur","tresor"].forEach(function(k){
+    ["romanisation","stabilite","faveur","tresor","liberte"].forEach(function(k){
       if(deltas[k]){ any=true;
         wrap.appendChild(creer("span","chip "+(deltas[k]>0?"d-plus":"d-moins"),(deltas[k]>0?"+":"")+deltas[k]+" "+noms[k])); }
     });
@@ -453,6 +475,7 @@
     journal.push({ acte:e.acte||"", titre:e.titre||"", label:opt.label,
                    consequence:opt.consequence+(note?" "+note:""), deltas:Object.assign({},deltas), contreDoc:dAlerte });
     if(opt.flag) flags[opt.flag]=true;
+    if(opt.finImposee) finForcee=opt.finImposee;
     if(opt.persistant) persistants.push(opt.persistant);
     var revenuTxt="";
     if(e.revenuApres){
@@ -510,7 +533,7 @@
 
     // action : poursuivre
     var act=creer("div","actions modal-actions");
-    var b=creer("button","btn btn-primaire",(idx<G.etapes.length-1)?"Continuer":"Fin du mandat");
+    var b=creer("button","btn btn-primaire",(finForcee||idx>=G.etapes.length-1)?"Fin du mandat":"Continuer");
     b.addEventListener("click",function(){ fermerModale(); continuer(); });
     act.appendChild(b); carte.appendChild(act);
 
@@ -519,14 +542,15 @@
   }
 
   function listeDeltas(deltas){
-    var noms={romanisation:"Démocratie",stabilite:"Paix sociale",faveur:"Soutien du peuple",tresor:"Trésor de la cité"};
+    var noms={romanisation:"Démocratie",stabilite:"Paix sociale",faveur:"Soutien du peuple",tresor:"Trésor de la cité",liberte:"Liberté"};
     var p=[];
-    ["romanisation","stabilite","faveur","tresor"].forEach(function(k){
+    ["romanisation","stabilite","faveur","tresor","liberte"].forEach(function(k){
       if(deltas[k]) p.push('<span class="d-'+(deltas[k]>0?"plus":"moins")+'">'+(deltas[k]>0?"+":"")+deltas[k]+' '+noms[k]+'</span>'); });
     return p.length?p.join(" · "):"Aucun changement.";
   }
 
   function continuer(){
+    if(finForcee){ var ff=finForcee; finForcee=null; return finEchec(ff); }
     var go=gameOver(); if(go) return finEchec(go);
     if(idx<G.etapes.length-1) etape(idx+1); else bilan();
   }

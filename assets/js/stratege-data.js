@@ -15,7 +15,7 @@
 window.STRATEGE = {
   titre:"Demokratia", sousTitre:"Gouverner Athènes au nom du peuple",
   delaiLecture:6,
-  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:100 },
+  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:100, liberte:55 },
 
   jauges:[
     { id:"romanisation", nom:"Démocratie",       icone:"temple",  type:"pct", couleur:"pourpre" },
@@ -150,13 +150,13 @@ window.STRATEGE = {
       contexte:"L'armée du roi perse Darius débarque à Marathon, tout près d'Athènes. Que décides-tu ?",
       revenuApres:true,
       options:[
-        { label:"Envoyer les hoplites citoyens affronter les Perses à Marathon", effets:{ romanisation:7, stabilite:4, faveur:9 },
+        { label:"Envoyer les hoplites citoyens affronter les Perses à Marathon", effets:{ romanisation:7, stabilite:4, faveur:9, liberte:10 },
           consequence:"Les citoyens-soldats repoussent les Perses à Marathon. La cité est fière et soudée.",
           pourquoi:"À Marathon, ce sont les citoyens-soldats (hoplites) qui sauvent la cité. Celui qui défend Athènes, c'est aussi celui qui vote : le citoyen." },
-        { label:"Attendre derrière les murs, sans risquer la bataille", effets:{ romanisation:0, stabilite:-6, faveur:-6 },
+        { label:"Attendre derrière les murs, sans risquer la bataille", effets:{ romanisation:0, stabilite:-6, faveur:-6, liberte:-4 },
           consequence:"Tu restes prudent, mais les Perses ravagent la campagne. Le peuple te trouve faible.",
           pourquoi:"Ne pas défendre la cité fait douter le peuple : un chef doit protéger Athènes et ses citoyens." },
-        { label:"Négocier et se soumettre au roi perse", effets:{ romanisation:-8, stabilite:-4, faveur:-12 },
+        { label:"Négocier et se soumettre au roi perse", effets:{ romanisation:-8, stabilite:-4, faveur:-12, liberte:-30 }, finImposee:"soumission",
           consequence:"Tu plies devant les Perses. Athènes perd sa liberté — et la démocratie avec elle.",
           pourquoi:"Se soumettre à un roi étranger, c'est renoncer à la liberté des citoyens, donc à la démocratie." }
       ]
@@ -169,7 +169,7 @@ window.STRATEGE = {
       source2:{ texte:"Les rameurs de ces navires sont les citoyens les plus pauvres. En devenant indispensables pour défendre la cité, ils prennent de l'importance dans la vie politique." },
       contexte:"Les Perses reviendront, plus nombreux. On vient de trouver beaucoup d'argent dans les mines. Thémistocle propose d'en faire une grande flotte. Mais c'est très cher.",
       options:[
-        { label:"Construire une grande flotte de trières", cout:55, effets:{ romanisation:9, stabilite:3, faveur:5 }, persistant:{ tresor:4 }, flag:"flotte",
+        { label:"Construire une grande flotte de trières", cout:55, effets:{ romanisation:9, stabilite:3, faveur:5, liberte:6 }, persistant:{ tresor:4 }, flag:"flotte",
           consequence:"Athènes devient une grande puissance sur mer. Les pauvres, devenus rameurs, comptent davantage dans la cité.",
           pourquoi:"La flotte, ramée par les plus pauvres, leur donne de l'importance : elle renforce la démocratie et fait d'Athènes une grande puissance." },
         { label:"Construire seulement quelques navires", cout:25, effets:{ romanisation:3, stabilite:1 },
@@ -189,13 +189,13 @@ window.STRATEGE = {
       contexte:"Le nouveau roi perse, Xerxès, arrive avec une armée immense et va prendre la ville. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Évacuer la ville et affronter les Perses sur mer à Salamine", effets:{ romanisation:6, stabilite:4, faveur:9 },
+        { label:"Évacuer la ville et affronter les Perses sur mer à Salamine", effets:{ romanisation:6, stabilite:4, faveur:9, liberte:10 },
           consequence:"La flotte grecque écrase les Perses à Salamine. Athènes est sauvée, et l'union des Grecs triomphe.",
           pourquoi:"À Salamine, la flotte et l'union des cités grecques repoussent les Perses : la liberté des cités est sauvée." },
         { label:"Défendre les murs de la ville coûte que coûte", effets:{ romanisation:-3, stabilite:-7, faveur:-7 },
           consequence:"La ville résiste mal et subit de lourdes pertes. Le peuple doute de toi.",
           pourquoi:"Sans la flotte et sans l'union des Grecs, la défense de terre seule était trop faible face aux Perses." },
-        { label:"Demander la paix à Xerxès pour épargner la ville", effets:{ romanisation:-9, stabilite:-3, faveur:-12 },
+        { label:"Demander la paix à Xerxès pour épargner la ville", effets:{ romanisation:-9, stabilite:-3, faveur:-12, liberte:-30 }, finImposee:"soumission",
           consequence:"Tu te soumets pour sauver les murs. Mais Athènes perd sa liberté et son honneur.",
           pourquoi:"Se soumettre, c'est perdre la liberté des citoyens — donc renoncer à la démocratie." }
       ]
@@ -209,10 +209,10 @@ window.STRATEGE = {
       contexte:"Après la victoire, les cités grecques veulent rester unies contre les Perses. Comment organises-tu cette alliance ?",
       revenuApres:true,
       options:[
-        { label:"Une alliance d'égaux : chaque cité reste libre", effets:{ romanisation:6, stabilite:5, faveur:4 }, persistant:{ tresor:3 },
+        { label:"Une alliance d'égaux : chaque cité reste libre", effets:{ romanisation:6, stabilite:5, faveur:4, liberte:5 }, persistant:{ tresor:3 },
           consequence:"Les cités s'unissent en confiance. L'alliance est solide et la paix règne entre les Grecs.",
           pourquoi:"Une alliance qui respecte les autres cités est plus durable et évite la guerre entre Grecs." },
-        { label:"Athènes dirige et reçoit l'argent des alliés", effets:{ romanisation:4, stabilite:-4, faveur:6 }, persistant:{ tresor:8 },
+        { label:"Athènes dirige et reçoit l'argent des alliés", effets:{ romanisation:4, stabilite:-4, faveur:6, liberte:-3 }, persistant:{ tresor:8 },
           consequence:"Athènes devient riche et puissante grâce à l'argent des alliés. Mais certaines cités se sentent dominées.",
           pourquoi:"L'argent des alliés enrichit Athènes (et, plus tard, sa démocratie), mais transformer l'alliance en empire prépare la guerre du Péloponnèse." },
         { label:"Refuser l'alliance : Athènes se débrouille seule", effets:{ romanisation:0, stabilite:2, faveur:-5 },
@@ -392,7 +392,7 @@ window.STRATEGE = {
       contexte:"Lasse de payer et d'obéir, une cité alliée (comme Samos) se révolte contre Athènes. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Écraser la révolte par la force pour tenir l'empire", effets:{ romanisation:0, stabilite:-8, faveur:5 }, persistant:{ tresor:4 },
+        { label:"Écraser la révolte par la force pour tenir l'empire", effets:{ romanisation:-3, stabilite:-8, faveur:5, liberte:-3 }, persistant:{ tresor:4 },
           consequence:"La cité révoltée est matée. L'empire tient et l'argent rentre — mais la peur et la rancune grandissent partout.",
           pourquoi:"Mater les alliés conserve l'empire et ses revenus, mais transforme l'alliance en domination détestée : un pas de plus vers la guerre." },
         { label:"Négocier un accord, en gardant l'alliance", effets:{ romanisation:1, stabilite:3, faveur:-1 }, persistant:{ tresor:-1 },
@@ -432,13 +432,13 @@ window.STRATEGE = {
       contexte:"La guerre commence (431 av. J.-C.). Sparte a la meilleure armée de terre, Athènes la meilleure flotte. Périclès propose de se protéger derrière les Longs Murs et de compter sur la mer. Acceptes-tu ?",
       revenuApres:true,
       options:[
-        { label:"Suivre la stratégie de Périclès : se protéger et compter sur la flotte", effets:{ romanisation:2, stabilite:0, faveur:2 }, persistant:{ tresor:-5 },
-          consequence:"Athènes encaisse les ravages sans s'effondrer et frappe par la mer. La guerre s'installe, longue et coûteuse.",
-          pourquoi:"La stratégie prudente de Périclès protège Athènes, mais la guerre traîne et coûte cher (la flotte)." },
-        { label:"Affronter Sparte sur terre pour défendre les champs", effets:{ romanisation:0, stabilite:-2, faveur:5 }, persistant:{ tresor:-3 },
+        { label:"Suivre la stratégie de Périclès : se protéger et compter sur la flotte", effets:{ romanisation:2, stabilite:-10, faveur:2, liberte:2 }, persistant:{ tresor:-5 },
+          consequence:"Athènes frappe par la mer et évite la bataille terrestre. Mais entasser toute la population derrière les Longs Murs crée une promiscuité dangereuse : la maladie couve.",
+          pourquoi:"La stratégie de Périclès protège des Spartiates, mais réfugier toute l'Attique dans la ville surpeuplée provoque bientôt une terrible épidémie de peste : la paix sociale en souffre lourdement." },
+        { label:"Affronter Sparte sur terre pour défendre les champs", effets:{ romanisation:0, stabilite:-2, faveur:5, liberte:-3 }, persistant:{ tresor:-3 },
           consequence:"Tes hoplites affrontent l'armée spartiate… et sont battus. Le peuple est content d'avoir résisté, mais l'armée souffre.",
           pourquoi:"Affronter Sparte sur son terrain, c'est se mesurer à la meilleure armée grecque : un choix populaire mais dangereux." },
-        { label:"Chercher tout de suite une paix avec Sparte", effets:{ romanisation:-2, stabilite:4, faveur:-7 },
+        { label:"Chercher tout de suite une paix avec Sparte", effets:{ romanisation:-2, stabilite:4, faveur:-7, liberte:-5 },
           consequence:"Tu demandes la paix dès le début. La cité est épargnée, mais le peuple crie à la lâcheté.",
           pourquoi:"Demander la paix trop tôt épargne la cité, mais le peuple, fier et belliqueux, n'accepte pas de plier." }
       ]
@@ -455,10 +455,10 @@ window.STRATEGE = {
         { label:"Garder une ligne prudente malgré la colère du peuple", effets:{ romanisation:5, stabilite:3, faveur:-5 },
           consequence:"Tu refuses la surenchère. La cité reste raisonnable, mais le peuple, enragé, te le reproche.",
           pourquoi:"Résister à la flatterie des meneurs protège la cité, mais déçoit un peuple qui veut des victoires immédiates." },
-        { label:"Suivre en partie les meneurs pour calmer la foule", effets:{ romanisation:-1, stabilite:-2, faveur:3 },
+        { label:"Suivre en partie les meneurs pour calmer la foule", effets:{ romanisation:-4, stabilite:-2, faveur:3 },
           consequence:"Tu cèdes un peu à la pression populaire. La foule est contente, la cité un peu moins sage.",
           pourquoi:"Suivre l'humeur de la foule gagne en popularité, mais éloigne des décisions réfléchies." },
-        { label:"Flatter le peuple et promettre la victoire totale", effets:{ romanisation:-6, stabilite:-4, faveur:7 },
+        { label:"Flatter le peuple et promettre la victoire totale", effets:{ romanisation:-12, stabilite:-4, faveur:7, liberte:-2 },
           consequence:"Tu dis au peuple ce qu'il veut entendre. Il t'acclame — mais la cité fonce vers des décisions dangereuses.",
           pourquoi:"La démagogie — flatter le peuple pour le pouvoir — détourne la démocratie de la raison et prépare les catastrophes." }
       ]
@@ -482,7 +482,7 @@ window.STRATEGE = {
         { label:"Envoyer une expédition prudente et limitée", effets:{ romanisation:1, stabilite:-3, faveur:2 }, persistant:{ tresor:-6 },
           consequence:"Une expédition mesurée part pour la Sicile. Le risque est réel, mais limité.",
           pourquoi:"Une expédition limitée ménage les forces d'Athènes, mais s'engage tout de même dans une aventure lointaine." },
-        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:60, effets:{ romanisation:-12, stabilite:-16, faveur:6 }, flag:"desastre_sicile",
+        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:60, effets:{ romanisation:-12, stabilite:-16, faveur:6, liberte:-4 }, flag:"desastre_sicile",
           consequence:"Une flotte gigantesque part vers la Sicile… et y est entièrement détruite. Athènes perd des milliers d'hommes et ses navires. Un désastre.",
           pourquoi:"L'expédition de Sicile, poussée par l'orgueil et la flatterie, fut une catastrophe qui brisa la puissance d'Athènes." }
       ]
@@ -496,13 +496,13 @@ window.STRATEGE = {
       contexte:"Après le désastre de Sicile, des familles riches profitent du chaos : elles veulent supprimer la démocratie et confier le pouvoir à quelques centaines d'hommes seulement. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Résister et défendre la démocratie", effets:{ romanisation:10, stabilite:-4, faveur:6 },
+        { label:"Résister et défendre la démocratie", effets:{ romanisation:10, stabilite:-4, faveur:6, liberte:6 },
           consequence:"Avec les marins et le peuple, tu fais échouer le coup. La démocratie est sauvée, mais la cité reste déchirée.",
           pourquoi:"Résister au coup des riches sauve la démocratie : le pouvoir du peuple ne se laisse pas confisquer sans combattre." },
         { label:"Accepter un pouvoir partagé, le temps de la guerre", effets:{ romanisation:-10, stabilite:1, faveur:-4 },
           consequence:"Tu acceptes que quelques-uns décident, « le temps de la guerre ». La démocratie recule.",
           pourquoi:"Confier le pouvoir à quelques-uns, même « temporairement », ouvre la porte à la fin de la démocratie." },
-        { label:"Se rallier aux riches et supprimer la démocratie", effets:{ romanisation:-22, stabilite:0, faveur:-10 },
+        { label:"Se rallier aux riches et supprimer la démocratie", effets:{ romanisation:-22, stabilite:0, faveur:-10, liberte:-8 },
           consequence:"Tu abandonnes le pouvoir du peuple aux quelques familles riches. L'oligarchie l'emporte.",
           pourquoi:"Supprimer la démocratie pour rejoindre les riches, c'est trahir tout ce que la cité a construit depuis Clisthène." }
       ]
@@ -516,13 +516,13 @@ window.STRATEGE = {
       contexte:"Épuisée, Athènes a perdu sa dernière flotte. Sparte assiège la ville affamée. Se battre jusqu'au bout, ou se rendre ?",
       revenuApres:true,
       options:[
-        { label:"Se rendre pour épargner la population, en gardant l'espoir", effets:{ romanisation:-3, stabilite:4, faveur:0 },
+        { label:"Se rendre pour épargner la population, en gardant l'espoir", effets:{ romanisation:-3, stabilite:4, faveur:0, liberte:-8 },
           consequence:"Athènes se rend. C'est la fin de sa domination. Mais la cité et son peuple survivent — l'avenir reste ouvert.",
           pourquoi:"Se rendre pour sauver la population met fin à l'hégémonie d'Athènes, mais préserve la cité et la possibilité d'un retour." },
-        { label:"Résister jusqu'au dernier, malgré la faim", effets:{ romanisation:-3, stabilite:-16, faveur:-7 },
+        { label:"Résister jusqu'au dernier, malgré la faim", effets:{ romanisation:-3, stabilite:-16, faveur:-7, liberte:-2 },
           consequence:"La ville résiste dans la famine et la souffrance. La reddition n'en sera que plus dure.",
           pourquoi:"Résister sans flotte ni vivres ne fait qu'aggraver les souffrances : la défaite est inévitable." },
-        { label:"Tout accepter de Sparte sans condition", effets:{ romanisation:-16, stabilite:1, faveur:-7 },
+        { label:"Tout accepter de Sparte sans condition", effets:{ romanisation:-16, stabilite:1, faveur:-7, liberte:-25 }, finImposee:"soumission",
           consequence:"Tu acceptes tout, même les Trente Tyrans imposés par Sparte. La démocratie est abolie.",
           pourquoi:"Accepter sans réserve le gouvernement imposé par Sparte, c'est laisser écraser la démocratie." }
       ]
@@ -536,13 +536,13 @@ window.STRATEGE = {
       contexte:"Sparte a imposé un gouvernement de quelques hommes, les Trente, qui gouvernent par la peur. Des Athéniens en exil veulent les renverser et rétablir la démocratie. Les soutiens-tu ?",
       revenuApres:true,
       options:[
-        { label:"Renverser les Trente et rétablir la démocratie", effets:{ romanisation:14, stabilite:6, faveur:8 },
+        { label:"Renverser les Trente et rétablir la démocratie", effets:{ romanisation:14, stabilite:6, faveur:8, liberte:14 },
           consequence:"Le peuple chasse les Trente et rétablit la démocratie. Athènes a perdu son empire, mais pas son idéal : le pouvoir du peuple renaît.",
           pourquoi:"Même vaincue militairement, Athènes rétablit sa démocratie : l'expérience devient un modèle qui traversera les siècles." },
         { label:"Accepter un régime mixte, prudent", effets:{ romanisation:4, stabilite:4, faveur:1 },
           consequence:"Un compromis : un peu de démocratie, un peu de prudence. La cité se relève doucement.",
           pourquoi:"Un régime prudent ramène l'ordre, mais sans retrouver toute la force de la démocratie d'avant." },
-        { label:"Laisser les Trente au pouvoir pour éviter de nouveaux troubles", effets:{ romanisation:-18, stabilite:-6, faveur:-11 },
+        { label:"Laisser les Trente au pouvoir pour éviter de nouveaux troubles", effets:{ romanisation:-18, stabilite:-6, faveur:-11, liberte:-12 },
           consequence:"Tu laisses les Trente écraser la cité. La démocratie athénienne s'éteint.",
           pourquoi:"Renoncer à rétablir la démocratie, c'est laisser mourir la première grande expérience démocratique de l'histoire." }
       ]
@@ -600,7 +600,9 @@ window.STRATEGE = {
     faveur:{ perso:"citoyen", expr:"severe", ambiance:"solennel", titre:"Chassé par le peuple",
       texte:"Les citoyens n'ont plus confiance en toi. Le peuple te retire le pouvoir et te chasse de la cité. À Athènes, c'est le peuple qui décide — même de ton sort." },
     tresor:{ perso:"stratege", expr:"severe", ambiance:"danger", titre:"Athènes ruinée",
-      texte:"Le trésor est vide. Sans argent, Athènes ne peut plus payer les rameurs de sa flotte, acheter du grain ni défendre ses murs : privée de moyens, la cité s'effondre. À Athènes, la puissance — et la démocratie qu'elle nourrissait — reposaient sur les ressources de la cité et de son empire." }
+      texte:"Le trésor est vide. Sans argent, Athènes ne peut plus payer les rameurs de sa flotte, acheter du grain ni défendre ses murs : privée de moyens, la cité s'effondre. À Athènes, la puissance — et la démocratie qu'elle nourrissait — reposaient sur les ressources de la cité et de son empire." },
+    soumission:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Athènes soumise",
+      texte:"En se soumettant à une puissance étrangère, Athènes renonce à sa liberté. Or la démocratie repose sur des citoyens libres : sans indépendance, il n'y a plus de pouvoir du peuple. La cité-État libre cesse d'exister, et la partie s'arrête là." }
   },
 
   bilans:[
