@@ -97,7 +97,7 @@
     rail.appendChild(marq); a.appendChild(rail);
     return { node:a, marq:marq };
   }
-  function rendreAxes(){
+  function rendreAxes(ms){
     var curRom=etat.romanisation, curLib=(etat.liberte!=null?etat.liberte:50);
     // départ à la dernière position affichée, pour que le curseur glisse jusqu'à la nouvelle
     var startRom=axesPrec?axesPrec.rom:curRom, startLib=axesPrec?axesPrec.lib:curLib;
@@ -106,9 +106,20 @@
     var d=unAxe("Oligarchie","Démocratie", startRom, "dem");
     var l=unAxe("Soumission","Liberté", startLib, "lib");
     box.appendChild(d.node); box.appendChild(l.node);
-    if(startRom!==curRom || startLib!==curLib){
-      // léger délai : la scène s'affiche, puis le curseur glisse visiblement
-      setTimeout(function(){ d.marq.style.left=clamp(curRom,0,100)+"%"; l.marq.style.left=clamp(curLib,0,100)+"%"; }, 300);
+    var bouge=(startRom!==curRom || startLib!==curLib);
+    var reduit=(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    var duree=(typeof ms==="number" && ms>0) ? ms : 0;
+    if(bouge && duree>0 && !reduit){
+      // le curseur glisse pendant tout le temps de lecture (synchronisé avec le décompte avant déverrouillage)
+      d.marq.style.transition="left "+duree+"ms linear";
+      l.marq.style.transition="left "+duree+"ms linear";
+      setTimeout(function(){
+        d.marq.style.left=clamp(curRom,0,100)+"%";
+        l.marq.style.left=clamp(curLib,0,100)+"%";
+      }, 60);
+    } else {
+      d.marq.style.left=clamp(curRom,0,100)+"%";
+      l.marq.style.left=clamp(curLib,0,100)+"%";
     }
     axesPrec={ rom:curRom, lib:curLib };
     return box;
@@ -395,7 +406,7 @@
     var verrou=ms>0 ? noteDeLecture(ms) : null;
     if(verrou) bas.appendChild(verrou);
     bas.appendChild(liste);
-    bas.appendChild(rendreAxes());
+    bas.appendChild(rendreAxes(ms));
 
     rendreJauges(malus);
     rendreScene({ perso:e.perso, expr:e.expr, ambiance:e.ambiance, nom:e.nom,
