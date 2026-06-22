@@ -5,7 +5,7 @@
    la guerre du Péloponnèse) restent à bâtir.
    Réalité sociale : « Une première expérience de démocratie » (HEC, 1re sec.).
    Langage volontairement simple (élèves de 12-13 ans). Les textes des
-   documents sont des ADAPTATIONS DE CLASSE inspirées du corpus HEC et du
+   documents sont des ADAPTATIONS inspirées du corpus HEC et du
    site muniverssocial.ca — À VÉRIFIER ET AJUSTER avant une évaluation.
    Les effets sur les jauges sont des hypothèses pédagogiques, À AJUSTER.
 
@@ -62,13 +62,13 @@ window.STRATEGE = {
       type:"evenement", id:"dettes", acte:"Acte I : Donner le pouvoir au peuple",
       perso:"paysan", expr:"inquiet", ambiance:"jour", nom:"Un paysan d'Athènes", document:"pnyx",
       titre:"Les paysans croulent sous les dettes",
-      source:{ texte:"Au début du 6ᵉ siècle avant notre ère, le réformateur Solon interdit de rendre un citoyen esclave parce qu'il a des dettes. Il libère ainsi les paysans pauvres de leur dépendance envers les riches.", ref:"D'après les réformes de Solon (6ᵉ s. av. J.-C.), adaptation de classe" },
-      source2:{ texte:"Mais les grandes familles riches prêtent l'argent et possèdent presque toutes les terres. Pour elles, effacer les dettes, c'est perdre leur pouvoir sur les pauvres.", ref:"D'après la situation des aristocrates athéniens, adaptation de classe" },
+      source:{ texte:"Au début du 6ᵉ siècle avant notre ère, le réformateur Solon interdit de rendre un citoyen esclave parce qu'il a des dettes. Il libère ainsi les paysans pauvres de leur dépendance envers les riches.", ref:"D'après les réformes de Solon (6ᵉ s. av. J.-C.), adaptation" },
+      source2:{ texte:"Mais les grandes familles riches prêtent l'argent et possèdent presque toutes les terres. Pour elles, effacer les dettes, c'est perdre leur pouvoir sur les pauvres.", ref:"D'après la situation des aristocrates athéniens, adaptation" },
       contexte:"Stratège, des paysans pauvres sont devenus esclaves parce qu'ils ne pouvaient pas rembourser leurs dettes aux riches. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Interdire de rendre un citoyen esclave pour ses dettes", effets:{ romanisation:9, stabilite:6, faveur:6 },
-          consequence:"Les paysans pauvres sont libérés. Le peuple respire et te soutient ; les riches grognent un peu.",
+        { label:"Interdire de rendre un citoyen esclave pour ses dettes", effets:{ romanisation:9, stabilite:-4, faveur:7 },
+          consequence:"Les paysans pauvres sont libérés : le peuple te soutient. Mais les riches, qui perdaient leur emprise sur eux, sont mécontents.",
           pourquoi:"En libérant les pauvres, Solon pose une première pierre de la démocratie : tous les citoyens, riches ou pauvres, comptent." },
         { label:"Un compromis : alléger les dettes, sans tout effacer", effets:{ romanisation:4, stabilite:2, faveur:1 },
           consequence:"Tu allèges le fardeau des pauvres sans trop froisser les riches. Un demi-pas.",
@@ -82,13 +82,13 @@ window.STRATEGE = {
       type:"evenement", id:"vote", acte:"Acte I : Donner le pouvoir au peuple",
       perso:"conseiller", expr:"neutre", ambiance:"jour", nom:"Démos, ton conseiller", document:"pnyx",
       titre:"Qui peut participer aux décisions ?",
-      source:{ texte:"À Athènes, on appelle citoyens les hommes libres, nés de parents athéniens, âgés de plus de 18 ans et ayant fait leur service militaire. Eux seuls peuvent participer à la vie politique.", ref:"D'après la définition du citoyen athénien, adaptation de classe" },
-      source2:{ texte:"Dans les faits, seuls ceux qui sont assez à l'aise pour quitter leur travail viennent voter. La plupart des citoyens sont des paysans qui peuvent difficilement laisser leurs terres.", ref:"D'après la vie politique à Athènes, adaptation de classe" },
+      source:{ texte:"À Athènes, on appelle citoyens les hommes libres, nés de parents athéniens, âgés de plus de 18 ans et ayant fait leur service militaire. Eux seuls peuvent participer à la vie politique.", ref:"D'après la définition du citoyen athénien, adaptation" },
+      source2:{ texte:"Dans les faits, seuls ceux qui sont assez à l'aise pour quitter leur travail viennent voter. La plupart des citoyens sont des paysans qui peuvent difficilement laisser leurs terres.", ref:"D'après la vie politique à Athènes, adaptation" },
       contexte:"Tu veux que les citoyens décident ensemble. Mais à qui donner ce droit : à tous les citoyens, ou seulement aux plus riches ?",
       revenuApres:true,
       options:[
-        { label:"Donner le droit de décider à tous les citoyens, riches comme pauvres", effets:{ romanisation:10, stabilite:1, faveur:5 },
-          consequence:"Tous les citoyens peuvent maintenant venir voter. Le peuple gagne du pouvoir.",
+        { label:"Donner le droit de décider à tous les citoyens, riches comme pauvres", effets:{ romanisation:10, stabilite:-5, faveur:6 },
+          consequence:"Tous les citoyens peuvent maintenant voter : le peuple gagne du pouvoir. Mais les grandes familles, qui perdent de l'influence, grognent.",
           pourquoi:"Donner la parole à tous les citoyens, et pas seulement aux riches, est le cœur de la démocratie athénienne." },
         { label:"Réserver les décisions aux citoyens qui possèdent des terres", effets:{ romanisation:3, stabilite:2, faveur:-2 },
           consequence:"Seuls les propriétaires décident. C'est plus large qu'avant, mais les pauvres restent à l'écart.",
@@ -102,13 +102,13 @@ window.STRATEGE = {
       type:"evenement", id:"clisthene", acte:"Acte I : Donner le pouvoir au peuple",
       perso:"conseiller", expr:"content", ambiance:"jour", nom:"Démos, ton conseiller", document:"pnyx",
       titre:"Mélanger les citoyens (la réforme de Clisthène)",
-      source:{ texte:"À la fin du 6ᵉ siècle avant notre ère, Clisthène répartit les citoyens en 10 groupes (des tribus) qui mélangent les habitants de différents quartiers. Riches et pauvres se retrouvent dans le même groupe.", ref:"D'après les réformes de Clisthène (vers 507 av. J.-C.), adaptation de classe" },
-      source2:{ texte:"Cette réforme affaiblit le pouvoir des vieilles familles riches. Désormais, tous les citoyens sont égaux devant la loi, qu'ils soient riches ou pauvres.", ref:"D'après l'effet des réformes de Clisthène, adaptation de classe" },
+      source:{ texte:"À la fin du 6ᵉ siècle avant notre ère, Clisthène répartit les citoyens en 10 groupes (des tribus) qui mélangent les habitants de différents quartiers. Riches et pauvres se retrouvent dans le même groupe.", ref:"D'après les réformes de Clisthène (vers 507 av. J.-C.), adaptation" },
+      source2:{ texte:"Cette réforme affaiblit le pouvoir des vieilles familles riches. Désormais, tous les citoyens sont égaux devant la loi, qu'ils soient riches ou pauvres.", ref:"D'après l'effet des réformes de Clisthène, adaptation" },
       contexte:"Les grandes familles riches contrôlent des régions entières. Clisthène propose de regrouper les citoyens autrement, en mélangeant les gens des différents quartiers. Qu'en penses-tu ?",
       revenuApres:true,
       options:[
-        { label:"Adopter la réforme : mélanger les citoyens, tous égaux devant la loi", effets:{ romanisation:12, stabilite:3, faveur:6 },
-          consequence:"Les vieilles familles perdent leur emprise. La démocratie naît vraiment.",
+        { label:"Adopter la réforme : mélanger les citoyens, tous égaux devant la loi", effets:{ romanisation:12, stabilite:-6, faveur:6 },
+          consequence:"Les vieilles familles perdent leur emprise : la démocratie naît vraiment. Mais, mécontentes, elles fragilisent la paix dans la cité.",
           pourquoi:"En cassant le pouvoir des grandes familles et en rendant les citoyens égaux devant la loi, Clisthène fait naître la démocratie athénienne." },
         { label:"Une version douce, sans trop déranger les familles", effets:{ romanisation:5, stabilite:3, faveur:1 },
           consequence:"Tu changes un peu les choses, mais les grandes familles gardent de l'influence.",
@@ -122,13 +122,13 @@ window.STRATEGE = {
       type:"evenement", id:"ecclesia", acte:"Acte I : Donner le pouvoir au peuple",
       perso:"citoyen", expr:"neutre", ambiance:"jour", nom:"Un citoyen à l'assemblée", document:"pnyx",
       titre:"Où se prennent les grandes décisions ?",
-      source:{ texte:"L'assemblée du peuple (l'ecclésia) réunit les citoyens. Elle décide de la paix et de la guerre, vote les lois et choisit les chefs de la cité. Les citoyens votent à main levée.", ref:"D'après les institutions politiques d'Athènes, adaptation de classe" },
-      source2:{ texte:"Les citoyens jugent aussi les procès dans un grand tribunal (l'Héliée). Les juges y sont tirés au sort, et non choisis selon leur richesse.", ref:"D'après les institutions politiques d'Athènes, adaptation de classe" },
+      source:{ texte:"L'assemblée du peuple (l'ecclésia) réunit les citoyens. Elle décide de la paix et de la guerre, vote les lois et choisit les chefs de la cité. Les citoyens votent à main levée.", ref:"D'après les institutions politiques d'Athènes, adaptation" },
+      source2:{ texte:"Les citoyens jugent aussi les procès dans un grand tribunal (l'Héliée). Les juges y sont tirés au sort, et non choisis selon leur richesse.", ref:"D'après les institutions politiques d'Athènes, adaptation" },
       contexte:"La guerre, la paix, les lois : qui doit décider de tout cela pour Athènes ?",
       revenuApres:true,
       options:[
-        { label:"Donner le dernier mot à l'assemblée du peuple", effets:{ romanisation:11, stabilite:2, faveur:7 },
-          consequence:"C'est l'assemblée des citoyens qui décide de tout. Le peuple tient vraiment le pouvoir.",
+        { label:"Donner le dernier mot à l'assemblée du peuple", effets:{ romanisation:11, stabilite:-5, faveur:7 },
+          consequence:"C'est l'assemblée des citoyens qui décide de tout : le peuple tient le pouvoir. Les familles riches, écartées, l'acceptent mal.",
           pourquoi:"Quand l'assemblée du peuple décide elle-même de la guerre, de la paix et des lois, c'est une démocratie directe : les citoyens décident eux-mêmes." },
         { label:"Laisser un petit conseil décider ; l'assemblée approuve ensuite", effets:{ romanisation:4, stabilite:3, faveur:0 },
           consequence:"Un conseil prépare tout ; l'assemblée ne fait qu'approuver. Le peuple a moins de pouvoir réel.",
@@ -146,12 +146,12 @@ window.STRATEGE = {
       controleRome:{ seuil:18, rappel:8, malus:6, faveurRappel:12 },
       perso:"stratege", expr:"severe", ambiance:"danger", nom:"Le stratège militaire", document:"marathon",
       titre:"Les Perses débarquent à Marathon",
-      source:{ texte:"L'armée du roi perse Darius traverse la mer pour envahir l'Attique, la région d'Athènes. Elle compte des dizaines de milliers de soldats : c'est énorme pour l'époque.", ref:"D'après le récit de l'armée de Darius (490 av. J.-C.), adaptation de classe" },
-      source2:{ texte:"Athènes peut compter sur environ 10 000 hoplites : des citoyens-soldats lourdement armés qui combattent côte à côte. Ce sont les citoyens eux-mêmes qui défendent la cité.", ref:"D'après l'armée athénienne, adaptation de classe" },
+      source:{ texte:"L'armée du roi perse Darius traverse la mer pour envahir l'Attique, la région d'Athènes. Elle compte des dizaines de milliers de soldats : c'est énorme pour l'époque.", ref:"D'après le récit de l'armée de Darius (490 av. J.-C.), adaptation" },
+      source2:{ texte:"Athènes peut compter sur environ 10 000 hoplites : des citoyens-soldats lourdement armés qui combattent côte à côte. Ce sont les citoyens eux-mêmes qui défendent la cité.", ref:"D'après l'armée athénienne, adaptation" },
       contexte:"L'armée du roi perse Darius débarque à Marathon, tout près d'Athènes. Que décides-tu ?",
       revenuApres:true,
       options:[
-        { label:"Envoyer les hoplites citoyens affronter les Perses à Marathon", effets:{ romanisation:7, stabilite:6, faveur:9 },
+        { label:"Envoyer les hoplites citoyens affronter les Perses à Marathon", effets:{ romanisation:7, stabilite:4, faveur:9 },
           consequence:"Les citoyens-soldats repoussent les Perses à Marathon. La cité est fière et soudée.",
           pourquoi:"À Marathon, ce sont les citoyens-soldats (hoplites) qui sauvent la cité. Celui qui défend Athènes, c'est aussi celui qui vote : le citoyen." },
         { label:"Attendre derrière les murs, sans risquer la bataille", effets:{ romanisation:0, stabilite:-6, faveur:-6 },
@@ -164,10 +164,10 @@ window.STRATEGE = {
     },
     {
       type:"construction", revenuApres:true, id:"flotte", acte:"Acte II : Affronter les Perses",
-      perso:"stratege", expr:"neutre", ambiance:"jour", nom:"Le stratège militaire", document:"trireme",
+      perso:"stratege", expr:"neutre", ambiance:"jour", nom:"Le stratège militaire", document:"mines",
       titre:"Construire une flotte de navires de guerre",
-      source:{ texte:"La cité possède des mines d'argent (à Laurion). Thémistocle propose d'utiliser cet argent pour construire une flotte de navires de guerre, les trières.", ref:"D'après le projet de flotte de Thémistocle, adaptation de classe" },
-      source2:{ texte:"Les rameurs de ces navires sont les citoyens les plus pauvres. En devenant indispensables pour défendre la cité, ils prennent de l'importance dans la vie politique.", ref:"D'après le rôle de la flotte athénienne, adaptation de classe" },
+      source:{ texte:"La cité possède des mines d'argent (à Laurion). Thémistocle propose d'utiliser cet argent pour construire une flotte de navires de guerre, les trières.", ref:"D'après le projet de flotte de Thémistocle, adaptation" },
+      source2:{ texte:"Les rameurs de ces navires sont les citoyens les plus pauvres. En devenant indispensables pour défendre la cité, ils prennent de l'importance dans la vie politique.", ref:"D'après le rôle de la flotte athénienne, adaptation" },
       contexte:"Les Perses reviendront, plus nombreux. On vient de trouver beaucoup d'argent dans les mines. Thémistocle propose d'en faire une grande flotte. Mais c'est très cher.",
       options:[
         { label:"Construire une grande flotte de trières", cout:55, effets:{ romanisation:9, stabilite:3, faveur:5 }, persistant:{ tresor:4 }, flag:"flotte",
@@ -183,14 +183,14 @@ window.STRATEGE = {
     },
     {
       type:"evenement", id:"salamine", acte:"Acte II : Affronter les Perses",
-      perso:"conseiller", expr:"inquiet", ambiance:"danger", nom:"Démos, ton conseiller", document:"trireme",
+      perso:"conseiller", expr:"inquiet", ambiance:"danger", nom:"Démos, ton conseiller",
       titre:"Le roi perse Xerxès marche sur Athènes",
-      source:{ texte:"Thémistocle propose d'évacuer la ville et de combattre les Perses sur mer, dans le détroit de Salamine, où les navires grecs seront plus habiles.", ref:"D'après la stratégie grecque (480 av. J.-C.), adaptation de classe" },
-      source2:{ texte:"Abandonner la ville est un déchirement : les Perses la brûleront. Mais plusieurs cités grecques, dont Sparte, acceptent de s'unir pour combattre ensemble.", ref:"D'après l'union des cités grecques, adaptation de classe" },
+      source:{ texte:"Thémistocle propose d'évacuer la ville et de combattre les Perses sur mer, dans le détroit de Salamine, où les navires grecs seront plus habiles.", ref:"D'après la stratégie grecque (480 av. J.-C.), adaptation" },
+      source2:{ texte:"Abandonner la ville est un déchirement : les Perses la brûleront. Mais plusieurs cités grecques, dont Sparte, acceptent de s'unir pour combattre ensemble.", ref:"D'après l'union des cités grecques, adaptation" },
       contexte:"Le nouveau roi perse, Xerxès, arrive avec une armée immense et va prendre la ville. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Évacuer la ville et affronter les Perses sur mer à Salamine", effets:{ romanisation:6, stabilite:5, faveur:9 },
+        { label:"Évacuer la ville et affronter les Perses sur mer à Salamine", effets:{ romanisation:6, stabilite:4, faveur:9 },
           consequence:"La flotte grecque écrase les Perses à Salamine. Athènes est sauvée, et l'union des Grecs triomphe.",
           pourquoi:"À Salamine, la flotte et l'union des cités grecques repoussent les Perses : la liberté des cités est sauvée." },
         { label:"Défendre les murs de la ville coûte que coûte", effets:{ romanisation:-3, stabilite:-7, faveur:-7 },
@@ -205,12 +205,12 @@ window.STRATEGE = {
       type:"evenement", id:"delos", acte:"Acte II : Affronter les Perses",
       perso:"stratege", expr:"content", ambiance:"jour", nom:"Le stratège militaire", document:"delos",
       titre:"Une alliance des cités grecques",
-      source:{ texte:"En 477 avant notre ère, des centaines de cités grecques forment une alliance, la Ligue de Délos. Son but : se défendre ensemble contre l'empire perse. Athènes en prend la tête.", ref:"D'après la Ligue de Délos (477 av. J.-C.), adaptation de classe" },
-      source2:{ texte:"Mais Athènes, la plus forte, pourrait transformer cette alliance en empire et commander aux autres cités. Cela risquerait un jour de fâcher Sparte et ses alliés.", ref:"D'après les rivalités entre cités grecques, adaptation de classe" },
+      source:{ texte:"En 477 avant notre ère, des centaines de cités grecques forment une alliance, la Ligue de Délos. Son but : se défendre ensemble contre l'empire perse. Athènes en prend la tête.", ref:"D'après la Ligue de Délos (477 av. J.-C.), adaptation" },
+      source2:{ texte:"Mais Athènes, la plus forte, pourrait transformer cette alliance en empire et commander aux autres cités. Cela risquerait un jour de fâcher Sparte et ses alliés.", ref:"D'après les rivalités entre cités grecques, adaptation" },
       contexte:"Après la victoire, les cités grecques veulent rester unies contre les Perses. Comment organises-tu cette alliance ?",
       revenuApres:true,
       options:[
-        { label:"Une alliance d'égaux : chaque cité reste libre", effets:{ romanisation:6, stabilite:7, faveur:4 }, persistant:{ tresor:3 },
+        { label:"Une alliance d'égaux : chaque cité reste libre", effets:{ romanisation:6, stabilite:5, faveur:4 }, persistant:{ tresor:3 },
           consequence:"Les cités s'unissent en confiance. L'alliance est solide et la paix règne entre les Grecs.",
           pourquoi:"Une alliance qui respecte les autres cités est plus durable et évite la guerre entre Grecs." },
         { label:"Athènes dirige et reçoit l'argent des alliés", effets:{ romanisation:4, stabilite:-4, faveur:6 }, persistant:{ tresor:8 },
@@ -247,7 +247,7 @@ window.STRATEGE = {
     stratege:{ nom:"Stratège", sous:"L'expérience équilibrée",
       seuilRevolte:22, seuilPaix:40, attenuation:0.6, bleed:1, revenuMod:1, malusActeMod:1 },
     pericles:{ nom:"Périclès", sous:"Pour les plus aguerris",
-      seuilRevolte:32, seuilPaix:48, attenuation:0.45, bleed:2, revenuMod:0.85, malusActeMod:1.4 }
+      seuilRevolte:38, seuilPaix:54, attenuation:0.4, bleed:3, revenuMod:0.8, malusActeMod:1.6 }
   },
 
   echecs:{

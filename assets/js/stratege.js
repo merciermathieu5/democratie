@@ -37,7 +37,7 @@
   function classeSeuil(v){ return v>=50?"ok":(v>=25?"moyen":"bas"); }
   function persoSrc(role,expr){ return "assets/img/perso/"+role+"-"+expr+".svg"; }
   function docSrc(d){ return "assets/img/"+d+".svg"; }
-  var DOCLEG = { acropole:"L'Acropole d'Athènes", pnyx:"L'assemblée du peuple", trireme:"Un navire de guerre (trière)", marathon:"La bataille de Marathon", delos:"L'alliance des cités" };
+  var DOCLEG = { acropole:"L'Acropole d'Athènes", pnyx:"L'assemblée du peuple", mines:"Les mines d'argent du Laurion", marathon:"La bataille de Marathon", delos:"L'alliance des cités" };
 
   function bilanRevenu(){
     var commerce=0, entretien=0;

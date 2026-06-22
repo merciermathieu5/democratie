@@ -50,7 +50,7 @@ Avant chaque décision, l'élève lit **deux documents** : un point de vue, puis
 autre. Ils sont inspirés du **corpus HEC** de la réalité sociale et du site
 muniverssocial.ca.
 
-> **Sources :** les textes sont des **adaptations de classe** rédigées en mots
+> **Sources :** les textes sont des **adaptations** rédigées en mots
 > simples pour des élèves de 12-13 ans — **et non des citations exactes**.
 > À **vérifier et ajuster** avant une évaluation. Tout se modifie dans les champs
 > `source` (Document 1) et `source2` (Document 2) de chaque étape, dans
