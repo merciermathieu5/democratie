@@ -1,8 +1,7 @@
 /* =========================================================================
    STRATÈGE — Gouverner Athènes au nom du peuple
-   TRANCHE I-II (8 décisions) : la naissance de la démocratie, puis les
-   guerres contre les Perses. Les actes III à V (Périclès, le Parthénon,
-   la guerre du Péloponnèse) restent à bâtir.
+   JEU COMPLET : 20 décisions en 5 actes, de la naissance de la démocratie
+   (Clisthène) à la fin de l'hégémonie athénienne (404-403 av. J.-C.).
    Réalité sociale : « Une première expérience de démocratie » (HEC, 1re sec.).
    Langage volontairement simple (élèves de 12-13 ans). Les textes des
    documents sont des ADAPTATIONS inspirées du corpus HEC et du
@@ -38,7 +37,7 @@ window.STRATEGE = {
     etapesAide:[
       "Avant chaque décision, lis les DEUX documents à droite : un point de vue, puis un autre.",
       "Chaque choix fait avancer (ou reculer) la démocratie, la paix dans la cité, le soutien du peuple et l'argent.",
-      "8 décisions en 2 actes : la naissance de la démocratie, puis les guerres contre les Perses."
+      "20 décisions en 5 actes : la naissance de la démocratie, les guerres médiques, l'âge d'or de Périclès, la guerre du Péloponnèse, puis la fin de l'hégémonie."
     ],
     pedagoTitre:"Contexte pédagogique",
     pedago:[
@@ -220,6 +219,257 @@ window.STRATEGE = {
           consequence:"Athènes reste seule. Sans alliés, elle est plus faible face aux Perses.",
           pourquoi:"Sans alliance, Athènes perd l'occasion de devenir une grande puissance protectrice des Grecs." }
       ]
+    },
+    /* ============ ACTE III — L'ÂGE D'OR DE PÉRICLÈS ============ */
+    {
+      type:"evenement", id:"misthos", acte:"Acte III : L'âge d'or de Périclès",
+      acteIntro:"Les Perses sont repoussés. Sous la conduite de Périclès, Athènes connaît son âge d'or : la démocratie s'approfondit, les arts brillent. Mais l'argent des cités alliées finance cette splendeur…",
+      acteMalus:{ stabilite:-4 }, acteMalusNote:"Les cités alliées commencent à se plaindre de la domination d'Athènes (paix sociale −4).",
+      controleRome:{ seuil:30, rappel:18, malus:7, faveurRappel:15 },
+      perso:"stratege", expr:"neutre", ambiance:"jour", nom:"Périclès, le stratège", document:"pnyx",
+      titre:"Payer les citoyens pour qu'ils participent",
+      source:{ texte:"La plupart des citoyens sont des paysans. Seuls les plus à l'aise peuvent quitter leur travail pour aller voter ou juger. Les pauvres, eux, en sont souvent empêchés.", ref:"D'après la vie politique à Athènes, adaptation" },
+      source2:{ texte:"Périclès fait voter une petite somme (le misthos) versée aux citoyens qui siègent. Désormais, même un pauvre peut prendre part aux décisions et à la justice.", ref:"D'après la réforme de Périclès, adaptation" },
+      contexte:"Les citoyens pauvres ne peuvent pas quitter leur travail pour siéger à l'assemblée ou juger les procès. Périclès propose de les payer pour le faire.",
+      revenuApres:true,
+      options:[
+        { label:"Payer tous les citoyens qui siègent, même les plus pauvres", effets:{ romanisation:11, stabilite:1, faveur:8 }, persistant:{ tresor:-4 },
+          consequence:"Même les pauvres peuvent désormais participer. La démocratie devient bien plus réelle — mais cela coûte cher chaque année.",
+          pourquoi:"En payant les citoyens, Périclès permet aux pauvres de participer vraiment : c'est l'un des sommets de la démocratie athénienne." },
+        { label:"Une petite indemnité, seulement pour les juges", effets:{ romanisation:5, faveur:3 }, persistant:{ tresor:-2 },
+          consequence:"Un pas mesuré : au moins la justice s'ouvre à tous.",
+          pourquoi:"Payer seulement les juges aide un peu, mais laisse beaucoup de pauvres loin de l'assemblée." },
+        { label:"Ne rien payer : la politique reste pour ceux qui en ont les moyens", effets:{ romanisation:-3, stabilite:1, faveur:-6 },
+          consequence:"Sans indemnité, les pauvres restent à l'écart. Dans les faits, ce sont surtout les riches qui décident.",
+          pourquoi:"Sans le misthos, la démocratie reste théorique : les pauvres ne peuvent pas exercer leurs droits." }
+      ]
+    },
+    {
+      type:"construction", revenuApres:true, id:"parthenon", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"stratege", expr:"content", ambiance:"jour", nom:"Périclès, le stratège", document:"acropole",
+      titre:"Bâtir le Parthénon",
+      source:{ texte:"Le grand chantier de l'Acropole emploie des milliers d'ouvriers et d'artistes. Athènes devient la plus belle cité grecque, admirée de tous.", ref:"D'après l'âge d'or de Périclès, adaptation" },
+      source2:{ texte:"Pour payer ces travaux, Athènes utilise l'argent que les cités alliées versent pour la défense commune. Beaucoup d'alliés trouvent injuste de financer la gloire d'Athènes.", ref:"D'après le trésor de la Ligue de Délos, adaptation" },
+      contexte:"Périclès veut couvrir l'Acropole de temples magnifiques, dont le Parthénon : du travail pour des milliers d'Athéniens et la gloire pour la cité. Mais avec quel argent ?",
+      options:[
+        { label:"Financer le Parthénon avec l'argent des alliés", cout:10, effets:{ romanisation:6, stabilite:-7, faveur:9 }, persistant:{ tresor:-2 },
+          consequence:"L'Acropole resplendit, les Athéniens ont du travail et sont fiers. Mais les alliés, dépouillés, en gardent une rancune profonde.",
+          pourquoi:"Le programme de Périclès fait la gloire d'Athènes, mais détourner l'argent des alliés transforme l'alliance en empire et prépare la guerre." },
+        { label:"Bâtir plus modestement, avec l'argent d'Athènes", cout:45, effets:{ romanisation:3, stabilite:1, faveur:4 },
+          consequence:"Des temples plus simples, payés par la cité. Moins de gloire, mais les alliés ne sont pas lésés.",
+          pourquoi:"Construire avec ses propres moyens évite de fâcher les alliés, mais Athènes brille moins." },
+        { label:"Renoncer aux grands travaux", effets:{ romanisation:-2, stabilite:2, faveur:-5 },
+          consequence:"Pas de grands monuments. Le peuple, privé de travail et de fierté, est déçu.",
+          pourquoi:"Sans le grand chantier, Athènes manque son âge d'or culturel." }
+      ]
+    },
+    {
+      type:"evenement", id:"piree", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"marchand", expr:"neutre", ambiance:"jour", nom:"Un marchand métèque", document:"commerce",
+      titre:"Le port du Pirée et les étrangers",
+      source:{ texte:"Les métèques sont des étrangers installés à Athènes. Artisans et commerçants, ils font la richesse de la cité. Ils paient des impôts et font le service militaire.", ref:"D'après les métèques, adaptation" },
+      source2:{ texte:"Mais les métèques n'ont aucun droit politique et ne peuvent pas posséder de terre. Ils participent à la richesse d'Athènes sans participer à ses décisions.", ref:"D'après les métèques, adaptation" },
+      contexte:"Le Pirée, le port d'Athènes, est devenu le plus grand marché de la Méditerranée. Beaucoup d'étrangers (les métèques) y vivent et y commercent. Quelle place leur donner ?",
+      revenuApres:true,
+      options:[
+        { label:"Accueillir largement les métèques et développer le commerce", effets:{ romanisation:2, stabilite:2, faveur:2 }, persistant:{ tresor:7 },
+          consequence:"Le Pirée déborde d'activité. Athènes s'enrichit grâce aux étrangers. La cité prospère.",
+          pourquoi:"Les métèques font la prospérité d'Athènes. Mais, exclus de la vie politique, ils montrent une limite de la démocratie." },
+        { label:"Les accepter, sans toucher aux privilèges des citoyens", effets:{ romanisation:1, stabilite:1 }, persistant:{ tresor:3 },
+          consequence:"Les métèques travaillent et paient, mais restent à l'écart. Un compromis prudent.",
+          pourquoi:"Garder les métèques à l'écart protège les privilèges des citoyens, mais limite l'ouverture de la cité." },
+        { label:"Limiter le nombre d'étrangers dans la cité", effets:{ romanisation:-1, stabilite:-2, faveur:-1 }, persistant:{ tresor:-3 },
+          consequence:"Moins d'étrangers, moins de commerce. La richesse du Pirée s'étiole.",
+          pourquoi:"Chasser les étrangers prive Athènes de la richesse qui faisait sa force." }
+      ]
+    },
+    {
+      type:"evenement", id:"ostracisme", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"citoyen", expr:"neutre", ambiance:"jour", nom:"Un citoyen à l'assemblée", document:"ostracisme",
+      titre:"L'ostracisme : bannir un citoyen",
+      source:{ texte:"Chaque année, les citoyens peuvent voter pour bannir l'un des leurs pendant 10 ans. Ils écrivent son nom sur un morceau de poterie (un ostrakon). C'est une décision prise par tout le peuple.", ref:"D'après l'ostracisme, adaptation" },
+      source2:{ texte:"L'ostracisme protège la cité contre ceux qui voudraient devenir tyrans. Mais il peut aussi servir à se débarrasser d'un rival, même honnête.", ref:"D'après l'ostracisme, adaptation" },
+      contexte:"Un citoyen devient si puissant qu'on le soupçonne de vouloir s'emparer du pouvoir. Le peuple peut voter pour le bannir 10 ans. Que fais-tu de cet outil ?",
+      revenuApres:true,
+      options:[
+        { label:"L'utiliser pour protéger la cité de la tyrannie", effets:{ romanisation:7, stabilite:4, faveur:3 },
+          consequence:"Le peuple écarte un ambitieux dangereux. La démocratie se protège elle-même.",
+          pourquoi:"Bien utilisé, l'ostracisme est un outil démocratique : c'est le peuple qui se défend contre la tyrannie." },
+        { label:"Ne l'utiliser qu'avec prudence, en dernier recours", effets:{ romanisation:3, stabilite:2 },
+          consequence:"Tu réserves l'ostracisme aux vrais dangers. Un usage mesuré.",
+          pourquoi:"Utilisé avec prudence, l'ostracisme reste un garde-fou sans devenir une arme." },
+        { label:"S'en servir pour bannir tes adversaires politiques", effets:{ romanisation:-5, stabilite:-5, faveur:2 },
+          consequence:"Tu élimines tes rivaux par le vote. Pratique pour toi, mais la confiance se fissure.",
+          pourquoi:"Détourner l'ostracisme pour écarter ses rivaux abîme la démocratie : l'outil se retourne contre elle." }
+      ]
+    },
+    /* ============ ACTE IV — TENIR L'EMPIRE, LA MARCHE VERS LA GUERRE ============ */
+    {
+      type:"evenement", id:"revolte_alliee", acte:"Acte IV : Tenir l'empire",
+      acteIntro:"L'âge d'or brille, mais la domination d'Athènes sur ses alliés pèse de plus en plus. Sparte, inquiète de la puissance d'Athènes, n'est pas loin. Il va falloir tenir l'empire — et bientôt faire la guerre.",
+      acteMalus:{ stabilite:-6 }, acteMalusNote:"Les tensions avec les autres cités grecques s'aggravent (paix sociale −6).",
+      controleRome:{ seuil:42, rappel:26, malus:8, faveurRappel:18 },
+      perso:"stratege", expr:"severe", ambiance:"danger", nom:"Périclès, le stratège", document:"delos",
+      titre:"Une cité alliée se révolte",
+      source:{ texte:"L'alliance de Délos est devenue un empire : Athènes commande, perçoit l'argent, et punit les cités qui désobéissent.", ref:"D'après l'empire athénien, adaptation" },
+      source2:{ texte:"Écraser une cité révoltée maintient la domination d'Athènes, mais nourrit la haine des autres alliés et inquiète Sparte.", ref:"D'après les rivalités grecques, adaptation" },
+      contexte:"Lasse de payer et d'obéir, une cité alliée (comme Samos) se révolte contre Athènes. Que fais-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Écraser la révolte par la force pour tenir l'empire", effets:{ romanisation:0, stabilite:-8, faveur:5 }, persistant:{ tresor:4 },
+          consequence:"La cité révoltée est matée. L'empire tient et l'argent rentre — mais la peur et la rancune grandissent partout.",
+          pourquoi:"Mater les alliés conserve l'empire et ses revenus, mais transforme l'alliance en domination détestée : un pas de plus vers la guerre." },
+        { label:"Négocier un accord, en gardant l'alliance", effets:{ romanisation:1, stabilite:3, faveur:-1 }, persistant:{ tresor:-1 },
+          consequence:"Tu trouves un compromis. L'alliance survit, plus respectueuse, mais Athènes y perd un peu.",
+          pourquoi:"Respecter davantage les alliés apaise les tensions, mais affaiblit la domination (et les revenus) d'Athènes." },
+        { label:"Laisser la cité partir librement", effets:{ romanisation:0, stabilite:5, faveur:-6 }, persistant:{ tresor:-5 },
+          consequence:"La cité quitte l'alliance. Les tensions baissent, mais d'autres pourraient suivre, et les revenus chutent.",
+          pourquoi:"Laisser partir les alliés apaise, mais fait fondre la puissance et les revenus d'Athènes." }
+      ]
+    },
+    {
+      type:"evenement", id:"megare", acte:"Acte IV : Tenir l'empire",
+      perso:"spartiate", expr:"severe", ambiance:"danger", nom:"Un envoyé de Sparte", document:"sparte",
+      titre:"Les tensions avec Sparte",
+      source:{ texte:"Athènes peut interdire à la cité de Mégare, alliée de Sparte, de commercer dans tous ses ports. Une façon de montrer sa puissance.", ref:"D'après le décret contre Mégare, adaptation" },
+      source2:{ texte:"Mais Sparte voit dans la puissance grandissante d'Athènes une menace pour toute la Grèce. C'est la vraie cause de la guerre qui vient.", ref:"D'après Thucydide, adaptation" },
+      contexte:"Sparte et ses alliés voient grandir la puissance d'Athènes avec inquiétude. Athènes pourrait bloquer le commerce d'une cité rivale (Mégare) pour montrer sa force. Que fais-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Bloquer le commerce de Mégare pour montrer sa force", effets:{ romanisation:0, stabilite:-9, faveur:4 },
+          consequence:"Athènes étouffe sa rivale. Mais Sparte et ses alliés y voient une provocation : la guerre se rapproche.",
+          pourquoi:"Humilier une alliée de Sparte montre la force d'Athènes, mais précipite la guerre du Péloponnèse." },
+        { label:"Chercher un compromis avec Sparte", effets:{ romanisation:0, stabilite:6, faveur:-2 },
+          consequence:"Tu apaises les tensions. La paix tient encore, au prix d'un peu de fierté.",
+          pourquoi:"Négocier avec Sparte retarde la guerre, mais demande à Athènes de modérer son ambition." },
+        { label:"Provoquer Sparte ouvertement", effets:{ romanisation:0, stabilite:-12, faveur:3 },
+          consequence:"Tu défies Sparte. La guerre devient inévitable, et Athènes n'est pas prête à tout encaisser.",
+          pourquoi:"Chercher l'affrontement avec la plus grande puissance militaire grecque est imprudent : la guerre éclatera dans les pires conditions." }
+      ]
+    },
+    {
+      type:"evenement", id:"guerre", acte:"Acte IV : Tenir l'empire",
+      perso:"stratege", expr:"severe", ambiance:"danger", nom:"Périclès, le stratège", document:"sparte",
+      titre:"La guerre du Péloponnèse éclate",
+      source:{ texte:"Périclès conseille d'éviter la bataille sur terre, où Sparte est invincible. Athènes se protège derrière ses Longs Murs et frappe par la mer.", ref:"D'après la stratégie de Périclès, adaptation" },
+      source2:{ texte:"Mais cette stratégie oblige les paysans à abandonner leurs champs et à s'entasser dans la ville. Beaucoup enragent de voir Sparte brûler leurs terres sans réagir.", ref:"D'après la guerre du Péloponnèse, adaptation" },
+      contexte:"La guerre commence (431 av. J.-C.). Sparte a la meilleure armée de terre, Athènes la meilleure flotte. Périclès propose de se protéger derrière les Longs Murs et de compter sur la mer. Acceptes-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Suivre la stratégie de Périclès : se protéger et compter sur la flotte", effets:{ romanisation:2, stabilite:0, faveur:2 }, persistant:{ tresor:-5 },
+          consequence:"Athènes encaisse les ravages sans s'effondrer et frappe par la mer. La guerre s'installe, longue et coûteuse.",
+          pourquoi:"La stratégie prudente de Périclès protège Athènes, mais la guerre traîne et coûte cher (la flotte)." },
+        { label:"Affronter Sparte sur terre pour défendre les champs", effets:{ romanisation:0, stabilite:-2, faveur:5 }, persistant:{ tresor:-3 },
+          consequence:"Tes hoplites affrontent l'armée spartiate… et sont battus. Le peuple est content d'avoir résisté, mais l'armée souffre.",
+          pourquoi:"Affronter Sparte sur son terrain, c'est se mesurer à la meilleure armée grecque : un choix populaire mais dangereux." },
+        { label:"Chercher tout de suite une paix avec Sparte", effets:{ romanisation:-2, stabilite:4, faveur:-7 },
+          consequence:"Tu demandes la paix dès le début. La cité est épargnée, mais le peuple crie à la lâcheté.",
+          pourquoi:"Demander la paix trop tôt épargne la cité, mais le peuple, fier et belliqueux, n'accepte pas de plier." }
+      ]
+    },
+    {
+      type:"evenement", id:"demagogues", acte:"Acte IV : Tenir l'empire",
+      perso:"citoyen", expr:"severe", ambiance:"danger", nom:"Un meneur du peuple", document:"pnyx",
+      titre:"La peste et les nouveaux meneurs",
+      source:{ texte:"Entassée derrière ses murs, la ville est ravagée par une épidémie. Périclès lui-même en meurt. Athènes perd son guide le plus sage.", ref:"D'après la peste d'Athènes, adaptation" },
+      source2:{ texte:"De nouveaux meneurs se font applaudir en promettant la victoire totale et en réclamant des mesures dures. Ils suivent l'humeur de la foule plus que l'intérêt de la cité.", ref:"D'après les meneurs après Périclès, adaptation" },
+      contexte:"Une terrible maladie frappe la ville surpeuplée et emporte Périclès. De nouveaux meneurs prennent sa place : des orateurs qui flattent le peuple pour gagner du pouvoir. Comment gouvernes-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Garder une ligne prudente malgré la colère du peuple", effets:{ romanisation:5, stabilite:3, faveur:-5 },
+          consequence:"Tu refuses la surenchère. La cité reste raisonnable, mais le peuple, enragé, te le reproche.",
+          pourquoi:"Résister à la flatterie des meneurs protège la cité, mais déçoit un peuple qui veut des victoires immédiates." },
+        { label:"Suivre en partie les meneurs pour calmer la foule", effets:{ romanisation:-1, stabilite:-2, faveur:3 },
+          consequence:"Tu cèdes un peu à la pression populaire. La foule est contente, la cité un peu moins sage.",
+          pourquoi:"Suivre l'humeur de la foule gagne en popularité, mais éloigne des décisions réfléchies." },
+        { label:"Flatter le peuple et promettre la victoire totale", effets:{ romanisation:-6, stabilite:-4, faveur:7 },
+          consequence:"Tu dis au peuple ce qu'il veut entendre. Il t'acclame — mais la cité fonce vers des décisions dangereuses.",
+          pourquoi:"La démagogie — flatter le peuple pour le pouvoir — détourne la démocratie de la raison et prépare les catastrophes." }
+      ]
+    },
+    /* ============ ACTE V — LA CRISE DE LA DÉMOCRATIE ET LA FIN DE L'HÉGÉMONIE ============ */
+    {
+      type:"evenement", id:"sicile", acte:"Acte V : La fin de l'hégémonie",
+      acteIntro:"La guerre s'éternise. Le peuple, fatigué et excité par ses meneurs, est prêt aux paris les plus risqués. La démocratie va vivre sa plus grande épreuve.",
+      acteMalus:{ stabilite:-6, faveur:-3 }, acteMalusNote:"La guerre épuise la cité (paix sociale −6, soutien −3).",
+      controleRome:{ seuil:50, rappel:34, malus:9, faveurRappel:22 },
+      perso:"citoyen", expr:"content", ambiance:"danger", nom:"Un meneur du peuple",
+      titre:"La grande expédition de Sicile",
+      source:{ texte:"Des orateurs promettent que la conquête de la lointaine Sicile rendra Athènes maîtresse de toute la Méditerranée. La foule, enthousiaste, rêve de gloire et de butin.", ref:"D'après l'expédition de Sicile (415 av. J.-C.), adaptation" },
+      source2:{ texte:"D'autres avertissent : la Sicile est très loin, l'expédition coûtera une flotte énorme, et un échec serait désastreux pour Athènes.", ref:"D'après les avertissements contre l'expédition, adaptation" },
+      contexte:"Des meneurs enflamment le peuple : pourquoi ne pas conquérir la riche Sicile ? Gloire et richesses promises… mais c'est loin et risqué. L'assemblée doit décider.",
+      revenuApres:true,
+      options:[
+        { label:"Refuser : c'est trop loin et trop risqué", effets:{ romanisation:6, stabilite:5, faveur:-6 },
+          consequence:"Tu retiens la cité. Le peuple, privé de son rêve, est déçu — mais Athènes garde ses forces.",
+          pourquoi:"Renoncer à une aventure démesurée est sage : Athènes conserve sa flotte et ses hommes pour la vraie guerre." },
+        { label:"Envoyer une expédition prudente et limitée", effets:{ romanisation:1, stabilite:-3, faveur:2 }, persistant:{ tresor:-6 },
+          consequence:"Une expédition mesurée part pour la Sicile. Le risque est réel, mais limité.",
+          pourquoi:"Une expédition limitée ménage les forces d'Athènes, mais s'engage tout de même dans une aventure lointaine." },
+        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:55, effets:{ romanisation:-4, stabilite:-10, faveur:8 },
+          consequence:"Une flotte gigantesque part vers la Sicile… et y est entièrement détruite. Athènes perd des milliers d'hommes et ses navires. Un désastre.",
+          pourquoi:"L'expédition de Sicile, poussée par l'orgueil et la flatterie, fut une catastrophe qui brisa la puissance d'Athènes." }
+      ]
+    },
+    {
+      type:"evenement", id:"coup", acte:"Acte V : La fin de l'hégémonie",
+      perso:"conseiller", expr:"severe", ambiance:"danger", nom:"Démos, ton conseiller", document:"oligarchie",
+      titre:"Les riches veulent renverser la démocratie",
+      source:{ texte:"Profitant des malheurs de la guerre, des riches s'emparent du pouvoir et suppriment l'assemblée du peuple. Quelques centaines d'hommes décident désormais pour tous.", ref:"D'après le coup des Quatre-Cents (411 av. J.-C.), adaptation" },
+      source2:{ texte:"Mais les marins de la flotte, des citoyens pauvres, refusent l'oligarchie et restent fidèles à la démocratie.", ref:"D'après la résistance à l'oligarchie, adaptation" },
+      contexte:"Après le désastre de Sicile, des familles riches profitent du chaos : elles veulent supprimer la démocratie et confier le pouvoir à quelques centaines d'hommes seulement. Que fais-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Résister et défendre la démocratie", effets:{ romanisation:10, stabilite:-4, faveur:6 },
+          consequence:"Avec les marins et le peuple, tu fais échouer le coup. La démocratie est sauvée, mais la cité reste déchirée.",
+          pourquoi:"Résister au coup des riches sauve la démocratie : le pouvoir du peuple ne se laisse pas confisquer sans combattre." },
+        { label:"Accepter un pouvoir partagé, le temps de la guerre", effets:{ romanisation:-5, stabilite:3, faveur:-2 },
+          consequence:"Tu acceptes que quelques-uns décident, « le temps de la guerre ». La démocratie recule.",
+          pourquoi:"Confier le pouvoir à quelques-uns, même « temporairement », ouvre la porte à la fin de la démocratie." },
+        { label:"Se rallier aux riches et supprimer la démocratie", effets:{ romanisation:-12, stabilite:2, faveur:-7 },
+          consequence:"Tu abandonnes le pouvoir du peuple aux quelques familles riches. L'oligarchie l'emporte.",
+          pourquoi:"Supprimer la démocratie pour rejoindre les riches, c'est trahir tout ce que la cité a construit depuis Clisthène." }
+      ]
+    },
+    {
+      type:"evenement", id:"defaite", acte:"Acte V : La fin de l'hégémonie",
+      perso:"spartiate", expr:"severe", ambiance:"solennel", nom:"Le vainqueur spartiate", document:"sparte",
+      titre:"La défaite face à Sparte",
+      source:{ texte:"Après des années de guerre, la flotte d'Athènes est détruite. Sparte bloque la ville, où la faim s'installe.", ref:"D'après la fin de la guerre (405-404 av. J.-C.), adaptation" },
+      source2:{ texte:"Sparte impose ses conditions : abattre les Longs Murs et accepter un gouvernement de quelques hommes, les Trente, soumis à Sparte.", ref:"D'après la reddition d'Athènes, adaptation" },
+      contexte:"Épuisée, Athènes a perdu sa dernière flotte. Sparte assiège la ville affamée. Se battre jusqu'au bout, ou se rendre ?",
+      revenuApres:true,
+      options:[
+        { label:"Se rendre pour épargner la population, en gardant l'espoir", effets:{ romanisation:-3, stabilite:4, faveur:0 },
+          consequence:"Athènes se rend. C'est la fin de sa domination. Mais la cité et son peuple survivent — l'avenir reste ouvert.",
+          pourquoi:"Se rendre pour sauver la population met fin à l'hégémonie d'Athènes, mais préserve la cité et la possibilité d'un retour." },
+        { label:"Résister jusqu'au dernier, malgré la faim", effets:{ romanisation:0, stabilite:-10, faveur:-3 },
+          consequence:"La ville résiste dans la famine et la souffrance. La reddition n'en sera que plus dure.",
+          pourquoi:"Résister sans flotte ni vivres ne fait qu'aggraver les souffrances : la défaite est inévitable." },
+        { label:"Tout accepter de Sparte sans condition", effets:{ romanisation:-8, stabilite:2, faveur:-4 },
+          consequence:"Tu acceptes tout, même les Trente Tyrans imposés par Sparte. La démocratie est abolie.",
+          pourquoi:"Accepter sans réserve le gouvernement imposé par Sparte, c'est laisser écraser la démocratie." }
+      ]
+    },
+    {
+      type:"evenement", id:"restauration", acte:"Acte V : La fin de l'hégémonie",
+      perso:"citoyen", expr:"content", ambiance:"jour", nom:"Un citoyen d'Athènes", document:"pnyx",
+      titre:"Rétablir la démocratie",
+      source:{ texte:"Les Trente, soutenus par Sparte, gouvernent par la violence et tuent leurs adversaires. Beaucoup d'Athéniens fuient en exil.", ref:"D'après le gouvernement des Trente (404 av. J.-C.), adaptation" },
+      source2:{ texte:"Des exilés démocrates reviennent en armes, renversent les Trente et rétablissent la démocratie dès l'année suivante. L'idée du pouvoir du peuple survit à la défaite.", ref:"D'après la restauration de la démocratie (403 av. J.-C.), adaptation" },
+      contexte:"Sparte a imposé un gouvernement de quelques hommes, les Trente, qui gouvernent par la peur. Des Athéniens en exil veulent les renverser et rétablir la démocratie. Les soutiens-tu ?",
+      revenuApres:true,
+      options:[
+        { label:"Renverser les Trente et rétablir la démocratie", effets:{ romanisation:14, stabilite:6, faveur:8 },
+          consequence:"Le peuple chasse les Trente et rétablit la démocratie. Athènes a perdu son empire, mais pas son idéal : le pouvoir du peuple renaît.",
+          pourquoi:"Même vaincue militairement, Athènes rétablit sa démocratie : l'expérience devient un modèle qui traversera les siècles." },
+        { label:"Accepter un régime mixte, prudent", effets:{ romanisation:4, stabilite:4, faveur:1 },
+          consequence:"Un compromis : un peu de démocratie, un peu de prudence. La cité se relève doucement.",
+          pourquoi:"Un régime prudent ramène l'ordre, mais sans retrouver toute la force de la démocratie d'avant." },
+        { label:"Laisser les Trente au pouvoir pour éviter de nouveaux troubles", effets:{ romanisation:-10, stabilite:-3, faveur:-8 },
+          consequence:"Tu laisses les Trente écraser la cité. La démocratie athénienne s'éteint.",
+          pourquoi:"Renoncer à rétablir la démocratie, c'est laisser mourir la première grande expérience démocratique de l'histoire." }
+      ]
     }
   ],
 
@@ -235,7 +485,19 @@ window.STRATEGE = {
     marathon:{ 2:"Le document montrait des citoyens-soldats prêts à défendre Athènes : se soumettre aux Perses, c'était abandonner leur liberté." },
     flotte:{ 2:"Les documents montraient que la flotte, ramée par les pauvres, renforçait la cité et la démocratie : y renoncer affaiblissait Athènes." },
     salamine:{ 2:"Le document montrait que la flotte et l'union des Grecs sauvaient la cité : se soumettre, c'était perdre la liberté." },
-    delos:{ 1:"Le second document avertissait qu'une alliance transformée en empire fâcherait Sparte et mènerait un jour à la guerre." }
+    delos:{ 1:"Le second document avertissait qu'une alliance transformée en empire fâcherait Sparte et mènerait un jour à la guerre." },
+    misthos:{ 2:"Le document montrait que sans indemnité les pauvres ne peuvent pas participer : ne rien payer gardait la démocratie réservée aux riches." },
+    parthenon:{ 0:"Le second document avertissait que prendre l'argent des alliés les révolterait : financer la gloire d'Athènes avec leur tribut préparait la guerre." },
+    piree:{ 2:"Les documents montraient que les métèques font la richesse d'Athènes : limiter les étrangers privait la cité de cette prospérité." },
+    ostracisme:{ 2:"Le document avertissait que l'ostracisme peut servir à éliminer des rivaux honnêtes : t'en servir contre tes adversaires en abusait." },
+    revolte_alliee:{ 0:"Les documents montraient qu'écraser les alliés nourrit la haine et inquiète Sparte : la force seule préparait la guerre." },
+    megare:{ 0:"Le document de Thucydide montrait que provoquer Sparte précipitait la guerre : bloquer Mégare allait dans ce sens.", 2:"Provoquer Sparte ouvertement, c'était foncer vers la guerre que les documents annonçaient." },
+    guerre:{ 1:"Le document montrait que Sparte était invincible sur terre : l'affronter en bataille rangée menait à la défaite." },
+    demagogues:{ 2:"Le document avertissait que les meneurs suivaient l'humeur de la foule plus que l'intérêt de la cité : les flatter détournait la démocratie." },
+    sicile:{ 2:"Le second document avertissait qu'une expédition lointaine et démesurée serait un désastre : la lancer en grand ignorait cet avertissement." },
+    coup:{ 1:"Confier le pouvoir à quelques-uns, même « temporairement », allait vers la fin de la démocratie que défendait le document.", 2:"Le document montrait que les marins du peuple refusaient l'oligarchie : t'y rallier trahissait la démocratie." },
+    defaite:{ 1:"Le document montrait qu'Athènes n'avait plus de flotte ni de vivres : résister jusqu'au bout n'aggravait que les souffrances.", 2:"Le second document montrait que Sparte voulait abolir la démocratie : tout accepter sans réserve la laissait écraser." },
+    restauration:{ 2:"Le second document montrait que les démocrates renversèrent les Trente et rétablirent la démocratie : laisser les Trente au pouvoir éteignait cette renaissance." }
   },
 
   /* Niveaux de difficulté. seuilRevolte = paix sociale sous laquelle la cité se déchire ;
@@ -247,7 +509,7 @@ window.STRATEGE = {
     stratege:{ nom:"Stratège", sous:"L'expérience équilibrée",
       seuilRevolte:22, seuilPaix:40, attenuation:0.6, bleed:1, revenuMod:1, malusActeMod:1 },
     pericles:{ nom:"Périclès", sous:"Pour les plus aguerris",
-      seuilRevolte:38, seuilPaix:54, attenuation:0.4, bleed:3, revenuMod:0.8, malusActeMod:1.6 }
+      seuilRevolte:34, seuilPaix:50, attenuation:0.4, bleed:2, revenuMod:0.8, malusActeMod:1.3 }
   },
 
   echecs:{
@@ -260,17 +522,17 @@ window.STRATEGE = {
   },
 
   bilans:[
-    { si:{ romanisation:60, stabilite:50, faveur:46 }, perso:"stratege", expr:"content", ambiance:"solennel",
-      titre:"Le début d'un âge d'or",
-      texte:"Tu as donné un vrai pouvoir au peuple, gardé la cité unie et repoussé les Perses. Athènes entre dans son âge d'or. (Tranche I-II : la suite — Périclès, le Parthénon, la guerre du Péloponnèse — viendra dans les actes III à V.)" },
-    { si:{ romanisation:46, stabilite:38, faveur:36 }, perso:"conseiller", expr:"content", ambiance:"jour",
-      titre:"Une démocratie bien partie",
-      texte:"Le pouvoir du peuple a pris racine et la cité a tenu face aux Perses. Quelques fragilités demeurent, mais l'essentiel est là." },
-    { si:{ romanisation:28 }, perso:"conseiller", expr:"neutre", ambiance:"jour",
-      titre:"Une démocratie encore fragile",
-      texte:"Le peuple a gagné un peu de pouvoir, mais l'expérience reste fragile : tu as parfois reculé, ou laissé la cité se diviser." },
-    { si:{}, perso:"citoyen", expr:"neutre", ambiance:"jour",
-      titre:"L'oligarchie reste maîtresse",
-      texte:"Le pouvoir du peuple n'a pas vraiment pris. Athènes ressemble encore à une cité dirigée par quelques familles riches." }
+    { si:{ romanisation:82, stabilite:48, faveur:48 }, perso:"stratege", expr:"content", ambiance:"solennel",
+      titre:"La démocratie modèle, un héritage pour les siècles",
+      texte:"Tu as donné le pouvoir au peuple, traversé les guerres et la crise sans laisser mourir la démocratie. Vaincue ou non sur les champs de bataille, Athènes lègue au monde sa grande invention : le pouvoir du peuple. Ton nom restera." },
+    { si:{ romanisation:60, stabilite:38, faveur:38 }, perso:"conseiller", expr:"content", ambiance:"jour",
+      titre:"Une expérience qui marque l'histoire",
+      texte:"La démocratie athénienne a fleuri et, malgré les épreuves et la défaite, l'idée du pouvoir du peuple survit. Quelques fractures demeurent, mais l'essentiel a tenu." },
+    { si:{ romanisation:36 }, perso:"conseiller", expr:"neutre", ambiance:"jour",
+      titre:"Une démocratie fragile",
+      texte:"Le peuple a goûté au pouvoir, mais l'expérience est restée fragile : tu as parfois reculé, cédé à la démagogie, ou laissé la cité se déchirer." },
+    { si:{}, perso:"citoyen", expr:"severe", ambiance:"jour",
+      titre:"L'oligarchie l'emporte",
+      texte:"Le pouvoir du peuple n'a pas tenu. Écrasée par la guerre et reprise par quelques familles riches, la démocratie athénienne s'est éteinte." }
   ]
 };

@@ -9,10 +9,9 @@ démocratie. Même mécanique que *Legatus* — mais le sens politique est **inv
 dans Legatus, le pouvoir vient d'en haut (l'empereur peut te rappeler) ; ici, il
 vient **d'en bas** (le peuple peut te chasser du pouvoir).
 
-> **⚠️ Tranche I-II seulement.** Cette version contient **8 décisions en 2 actes** :
-> la naissance de la démocratie, puis les guerres contre les Perses. Les actes
-> III à V (Périclès et l'âge d'or, la guerre du Péloponnèse, la crise et la fin de
-> l'hégémonie) **restent à bâtir** une fois cette tranche validée.
+> **Jeu complet : 20 décisions en 5 actes**, de la naissance de la démocratie
+> (Clisthène) à la fin de l'hégémonie athénienne (404-403 av. J.-C.), en passant
+> par les guerres médiques, l'âge d'or de Périclès et la guerre du Péloponnèse.
 
 ## Lancer le jeu
 
@@ -33,16 +32,38 @@ Double-clique `index.html` — aucun serveur requis, fonctionne hors-ligne.
 Comme dans Legatus, **l'option qui fait le plus avancer une jauge coûte presque
 toujours ailleurs**. On ne maximise pas tout : la maîtrise, c'est l'équilibre.
 
-## Les deux actes (8 décisions)
+## Les cinq actes (20 décisions)
 
 **Acte I — Donner le pouvoir au peuple** : les dettes des paysans (Solon) · qui
 peut voter · la réforme de Clisthène · l'assemblée du peuple (l'ecclésia).
 
 **Acte II — Affronter les Perses** : Marathon (Darius) · construire une flotte de
-trières (Thémistocle) · Salamine (Xerxès) · fonder la Ligue de Délos.
+trières (Thémistocle, financée par les mines du Laurion) · Salamine (Xerxès) ·
+fonder la Ligue de Délos.
 
-Entre les deux actes, un **intermède** marque l'arrivée des Perses, et le peuple
-fait un premier bilan de tes progrès démocratiques.
+**Acte III — L'âge d'or de Périclès** : payer les citoyens pour qu'ils participent
+(le misthos) · bâtir le Parthénon · le port du Pirée et les métèques · l'ostracisme.
+
+**Acte IV — Tenir l'empire** : une cité alliée se révolte (Samos) · les tensions
+avec Sparte (Mégare) · la guerre du Péloponnèse éclate (431) · la peste et les
+meneurs démagogues (mort de Périclès).
+
+**Acte V — La fin de l'hégémonie** : la grande expédition de Sicile (415) · le coup
+oligarchique des Quatre-Cents (411) · la défaite face à Sparte (404) · le
+rétablissement de la démocratie (403).
+
+Au début de chaque acte (II à V), un **intermède** marque le passage du temps, un
+**malus** traduit la pression de l'époque (guerre, tensions impériales), et le
+peuple **juge tes progrès démocratiques** : si la démocratie est trop faible, il te
+chasse.
+
+### Note d'équilibre
+
+Les grandes avancées démocratiques (libérer les pauvres, le vote pour tous, les
+tribus de Clisthène, l'assemblée souveraine) **mécontentent les familles riches** et
+coûtent de la *Paix sociale* : pousser la démocratie **et** l'empire sans ménager
+alliés et citoyens mène à la crise oligarchique (411, 404). Le niveau **Périclès**
+est exigeant : seul un jeu équilibré y atteint l'apogée.
 
 ## Deux documents à confronter
 
@@ -89,6 +110,7 @@ si tu veux ; le lecteur est dans `assets/js/stratege-audio.js`.
 
 ## Validation
 
-La tranche a été vérifiée par un harnais jsdom qui joue des parties complètes
-(bons choix, choix moyens, mauvais choix) : amorçage, 8 décisions, intermède
-d'acte, conséquences, bilan et fins d'échec, sans erreur d'exécution.
+Le jeu complet a été vérifié par un harnais jsdom qui joue des parties entières
+(jeu sage, imprudent, timide, mauvais) sur les **trois niveaux** : amorçage, 20
+décisions, intermèdes et malus d'acte, conséquences, bilans et fins d'échec, sans
+erreur d'exécution.

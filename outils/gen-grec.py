@@ -86,6 +86,12 @@ def corps(role):
                 f'<path d="M235 336 C302 338 324 372 332 432 C302 412 272 398 247 394 Z" fill="{ROUGE}"/>'
                 f'<path d="M245 348 C295 354 316 384 322 428" fill="none" stroke="{ROUGE_O}" stroke-width="3"/>'
                 f'<path d="M86 404 Q180 420 232 404" fill="none" stroke="#A99A78" stroke-width="5"/>')
+    if role=="marchand":
+        chiton=f'<path d="M70 440 C70 350 120 320 200 320 C280 320 330 350 330 440 Z" fill="#C98A5A"/>'
+        bord=f'<path d="M118 440 C150 360 250 345 320 360" fill="none" stroke="{OCRE}" stroke-width="9"/>'
+        bourse=(f'<ellipse cx="116" cy="410" rx="15" ry="19" fill="#8A5A2B" stroke="{CERNE}" stroke-width="3"/>'
+                f'<path d="M104 396 Q116 388 128 396" fill="none" stroke="{CERNE}" stroke-width="3"/>')
+        return chiton+drape+bord+bourse+pin
     return base+drape+pin
 
 # ------------------------------------------------------------------ COIFFE
@@ -134,6 +140,12 @@ def coiffe(role):
                 f'<path d="M138 96 H262" stroke="{OR}" stroke-width="6"/>'
                 f'<path d="M150 72 H250" stroke="{OR}" stroke-width="4"/>'
                 +"".join(f'<circle cx="{x}" cy="58" r="3.5" fill="{OR}"/>' for x in (168,200,232)))
+    if role=="marchand":
+        cap="#2E6E78"; cap_o="#21545C"
+        bonnet=(f'<path d="M130 120 C128 74 152 54 194 54 C232 54 256 72 250 104 '
+                f'C244 84 224 76 198 76 C170 76 146 86 134 110 Z" fill="{cap}" stroke="{cap_o}" stroke-width="2"/>'
+                f'<path d="M150 58 C138 36 108 40 100 62 C118 52 140 56 154 70 Z" fill="{cap}" stroke="{cap_o}" stroke-width="2"/>')
+        return cheveux(CHEV,CHEV_O)+bonnet
     return cheveux(CHEV,CHEV_O)
 
 # ------------------------------------------------------------------ BARBE
@@ -143,7 +155,7 @@ def barbe(role):
             f'<path d="M176 248 C186 258 214 258 224 248 C214 262 186 262 176 248 Z" fill="{{c}}" stroke="none"/>')
     if role in ("conseiller",):
         return courte.replace("{c}",GRIS)
-    if role in ("citoyen","stratege"):
+    if role in ("citoyen","stratege","marchand"):
         return courte.replace("{c}",CHEV)
     if role=="paysan":
         return f'<path d="M158 248 C170 268 230 268 242 248 C232 280 168 280 158 248 Z" fill="{CHEV}" stroke="none" opacity="0.7"/>'
@@ -180,7 +192,7 @@ def perso(role="conseiller", expr="neutre"):
     parts.append('</g>')
     return f'<svg width="400" height="440" viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg">{"".join(parts)}</svg>'
 
-ROLES=("conseiller","citoyen","stratege","paysan","perse","spartiate")
+ROLES=("conseiller","citoyen","stratege","paysan","perse","spartiate","marchand")
 EXPRS=("neutre","content","inquiet","severe")
 
 if __name__=="__main__":
