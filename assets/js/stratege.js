@@ -15,7 +15,7 @@
     piece:'<circle cx="12" cy="12" r="9" fill="#3A2E26"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="#F2E7CF" stroke-width="1.1"/><path d="M13.5 8.5 C10 8 9.5 11 12 11.6 C14.5 12.2 14 15.4 10.6 15" fill="none" stroke="#F2E7CF" stroke-width="1.3" stroke-linecap="round"/>'
   };
 
-  var etat, flags, persistants, idx, enRevolte, DIFF;
+  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, DIFF;
   var GEN_VERROU=0;   // jeton de génération : invalide un compte à rebours quand la scène change
   var journal=[];     // journal du mandat : une entrée par décision (pour le bilan de fin)
   var aConnuRevolte=false;  // au moins une révolte a éclaté durant le mandat ?
@@ -28,7 +28,7 @@
     return (G.difficultes && G.difficultes[G.difficultes.defaut||"legat"]) ||
            { nom:"Légat", seuilRevolte:30, seuilPaix:42, attenuation:0.5, bleed:2, revenuMod:1, malusActeMod:1 };
   }
-  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
+  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
 
   function el(s){ return document.querySelector(s); }
   function creer(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
@@ -60,6 +60,7 @@
   function rendreJauges(deltas){
     var b=el("#jauges"); b.innerHTML="";
     if(enRevolte) b.appendChild(creer("div","revolte-banner","\u2694 La cité est déchirée : les progrès s'arrêtent et l'argent ne rentre plus"));
+    if(criseTresor) b.appendChild(creer("div","revolte-banner","\u26A0 Trésor vide : la cité ne peut plus payer sa flotte ni son grain"));
     G.jauges.forEach(function(j){
       var v=etat[j.id];
       var carte=creer("div","jauge");
@@ -71,7 +72,7 @@
       if(deltas&&deltas[j.id]){ var d=deltas[j.id]; val.appendChild(creer("span","delta "+(d>0?"plus":"moins"),(d>0?"+":"")+d)); }
       haut.appendChild(val); corps.appendChild(haut);
       var rail=creer("div","rail"); var fill=creer("div","fill");
-      fill.style.width=(j.type==="res"?clamp(v/200*100,0,100):v)+"%";
+      fill.style.width=(j.type==="res"?clamp(v/300*100,0,100):v)+"%";
       fill.classList.add(j.couleur==="seuil"?classeSeuil(v):j.couleur);
       rail.appendChild(fill); corps.appendChild(rail);
       if(j.id==="tresor"){
@@ -87,7 +88,7 @@
   function appliquer(eff){ var d={}; Object.keys(eff||{}).forEach(function(k){ var a=etat[k];
     etat[k]=(k==="tresor")?Math.max(0,etat[k]+eff[k]):clamp(etat[k]+eff[k],0,100); d[k]=etat[k]-a; }); return d; }
   function fusion(a,b){ var r=Object.assign({},a); Object.keys(b||{}).forEach(function(k){ r[k]=(r[k]||0)+b[k]; }); return r; }
-  function gameOver(){ if(etat.stabilite<=0)return "stabilite"; if(etat.faveur<=0)return "faveur"; return null; }
+  function gameOver(){ if(faillite)return "tresor"; if(etat.stabilite<=0)return "stabilite"; if(etat.faveur<=0)return "faveur"; if(etat.romanisation<=0)return "romanisation"; return null; }
   function estPositif(d){ var s=0; Object.keys(d).forEach(function(k){ if(k!=="tresor")s+=d[k]; }); return s>=0; }
 
   /* ---------- révolte (niveau de difficulté) ---------- */
@@ -116,7 +117,25 @@
     return "";
   }
 
-  /* ---------- scène (case BD) ---------- */
+  // Met à jour la crise du trésor d'après le trésor courant ; renvoie le message à afficher.
+  // Trésor vide = la cité ne peut plus payer ses rameurs ni acheter du grain : choc immédiat,
+  // puis effondrement (faillite) si elle ne se renfloue pas au tour suivant.
+  function majTresor(deltas){
+    if(etat.tresor<=0){
+      if(!criseTresor){
+        criseTresor=true;
+        ajoute(deltas, appliquer({stabilite:-12, faveur:-8}));
+        return "\u26A0 Le tr\u00e9sor est vide : la cit\u00e9 ne peut plus payer ses rameurs ni acheter de grain. Renfloue-le, sinon Ath\u00e8nes s'effondrera.";
+      }
+      faillite=true;
+      return "\u2716 Ruin\u00e9e, Ath\u00e8nes ne peut plus se d\u00e9fendre ni se nourrir : la cit\u00e9 s'effondre.";
+    }
+    if(criseTresor){
+      criseTresor=false;
+      return "\u2714 Le tr\u00e9sor se renfloue : la cit\u00e9 \u00e9carte la faillite.";
+    }
+    return "";
+  }
   function rendreScene(o){
     // o : {perso, expr, ambiance, nom, texte, alerte, document, docs[], html}
     var scene=el("#scene"); scene.innerHTML="";
@@ -449,6 +468,7 @@
       }
     }
     var revolteTxt = majRevolte(deltas);
+    var tresorTxt = majTresor(deltas);
     var positif=estPositif(deltas);
     var expr=positif?"content":"inquiet";
 
@@ -481,6 +501,7 @@
     if(revenuTxt) imp.appendChild(creer("div","corr",esc(revenuTxt)));
     carte.appendChild(imp);
     if(revolteTxt) carte.appendChild(creer("div","note-revolte",esc(revolteTxt)));
+    if(tresorTxt) carte.appendChild(creer("div","note-revolte",esc(tresorTxt)));
 
     // explication pédagogique
     var pq=creer("div","pourquoi");

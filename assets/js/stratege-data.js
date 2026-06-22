@@ -15,7 +15,7 @@
 window.STRATEGE = {
   titre:"Demokratia", sousTitre:"Gouverner Athènes au nom du peuple",
   delaiLecture:6,
-  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:90 },
+  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:100 },
 
   jauges:[
     { id:"romanisation", nom:"Démocratie",       icone:"temple",  type:"pct", couleur:"pourpre" },
@@ -482,7 +482,7 @@ window.STRATEGE = {
         { label:"Envoyer une expédition prudente et limitée", effets:{ romanisation:1, stabilite:-3, faveur:2 }, persistant:{ tresor:-6 },
           consequence:"Une expédition mesurée part pour la Sicile. Le risque est réel, mais limité.",
           pourquoi:"Une expédition limitée ménage les forces d'Athènes, mais s'engage tout de même dans une aventure lointaine." },
-        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:55, effets:{ romanisation:-4, stabilite:-10, faveur:8 },
+        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:60, effets:{ romanisation:-12, stabilite:-16, faveur:6 }, flag:"desastre_sicile",
           consequence:"Une flotte gigantesque part vers la Sicile… et y est entièrement détruite. Athènes perd des milliers d'hommes et ses navires. Un désastre.",
           pourquoi:"L'expédition de Sicile, poussée par l'orgueil et la flatterie, fut une catastrophe qui brisa la puissance d'Athènes." }
       ]
@@ -499,10 +499,10 @@ window.STRATEGE = {
         { label:"Résister et défendre la démocratie", effets:{ romanisation:10, stabilite:-4, faveur:6 },
           consequence:"Avec les marins et le peuple, tu fais échouer le coup. La démocratie est sauvée, mais la cité reste déchirée.",
           pourquoi:"Résister au coup des riches sauve la démocratie : le pouvoir du peuple ne se laisse pas confisquer sans combattre." },
-        { label:"Accepter un pouvoir partagé, le temps de la guerre", effets:{ romanisation:-5, stabilite:3, faveur:-2 },
+        { label:"Accepter un pouvoir partagé, le temps de la guerre", effets:{ romanisation:-10, stabilite:1, faveur:-4 },
           consequence:"Tu acceptes que quelques-uns décident, « le temps de la guerre ». La démocratie recule.",
           pourquoi:"Confier le pouvoir à quelques-uns, même « temporairement », ouvre la porte à la fin de la démocratie." },
-        { label:"Se rallier aux riches et supprimer la démocratie", effets:{ romanisation:-12, stabilite:2, faveur:-7 },
+        { label:"Se rallier aux riches et supprimer la démocratie", effets:{ romanisation:-22, stabilite:0, faveur:-10 },
           consequence:"Tu abandonnes le pouvoir du peuple aux quelques familles riches. L'oligarchie l'emporte.",
           pourquoi:"Supprimer la démocratie pour rejoindre les riches, c'est trahir tout ce que la cité a construit depuis Clisthène." }
       ]
@@ -519,10 +519,10 @@ window.STRATEGE = {
         { label:"Se rendre pour épargner la population, en gardant l'espoir", effets:{ romanisation:-3, stabilite:4, faveur:0 },
           consequence:"Athènes se rend. C'est la fin de sa domination. Mais la cité et son peuple survivent — l'avenir reste ouvert.",
           pourquoi:"Se rendre pour sauver la population met fin à l'hégémonie d'Athènes, mais préserve la cité et la possibilité d'un retour." },
-        { label:"Résister jusqu'au dernier, malgré la faim", effets:{ romanisation:0, stabilite:-10, faveur:-3 },
+        { label:"Résister jusqu'au dernier, malgré la faim", effets:{ romanisation:-3, stabilite:-16, faveur:-7 },
           consequence:"La ville résiste dans la famine et la souffrance. La reddition n'en sera que plus dure.",
           pourquoi:"Résister sans flotte ni vivres ne fait qu'aggraver les souffrances : la défaite est inévitable." },
-        { label:"Tout accepter de Sparte sans condition", effets:{ romanisation:-8, stabilite:2, faveur:-4 },
+        { label:"Tout accepter de Sparte sans condition", effets:{ romanisation:-16, stabilite:1, faveur:-7 },
           consequence:"Tu acceptes tout, même les Trente Tyrans imposés par Sparte. La démocratie est abolie.",
           pourquoi:"Accepter sans réserve le gouvernement imposé par Sparte, c'est laisser écraser la démocratie." }
       ]
@@ -542,14 +542,14 @@ window.STRATEGE = {
         { label:"Accepter un régime mixte, prudent", effets:{ romanisation:4, stabilite:4, faveur:1 },
           consequence:"Un compromis : un peu de démocratie, un peu de prudence. La cité se relève doucement.",
           pourquoi:"Un régime prudent ramène l'ordre, mais sans retrouver toute la force de la démocratie d'avant." },
-        { label:"Laisser les Trente au pouvoir pour éviter de nouveaux troubles", effets:{ romanisation:-10, stabilite:-3, faveur:-8 },
+        { label:"Laisser les Trente au pouvoir pour éviter de nouveaux troubles", effets:{ romanisation:-18, stabilite:-6, faveur:-11 },
           consequence:"Tu laisses les Trente écraser la cité. La démocratie athénienne s'éteint.",
           pourquoi:"Renoncer à rétablir la démocratie, c'est laisser mourir la première grande expérience démocratique de l'histoire." }
       ]
     }
   ],
 
-  revenu:{ socle:5, parRomanisation:0.10, seuil:45, facteurInstable:0.5, texte:"L'argent de la cité" },
+  revenu:{ socle:8, parRomanisation:0.18, seuil:45, facteurInstable:0.5, texte:"L'argent de la cité" },
 
   /* Choix qui ne respectent pas l'information des documents : { idÉtape : { indiceOption : note } }.
      PREMIÈRE PASSE — à réviser selon ton jugement. */
@@ -598,7 +598,9 @@ window.STRATEGE = {
     romanisation:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Le retour de l'oligarchie",
       texte:"Tu n'as pas assez donné de pouvoir au peuple. Quelques familles riches reprennent le contrôle d'Athènes : la démocratie n'a pas pris. Ta mission était de bâtir le pouvoir du peuple." },
     faveur:{ perso:"citoyen", expr:"severe", ambiance:"solennel", titre:"Chassé par le peuple",
-      texte:"Les citoyens n'ont plus confiance en toi. Le peuple te retire le pouvoir et te chasse de la cité. À Athènes, c'est le peuple qui décide — même de ton sort." }
+      texte:"Les citoyens n'ont plus confiance en toi. Le peuple te retire le pouvoir et te chasse de la cité. À Athènes, c'est le peuple qui décide — même de ton sort." },
+    tresor:{ perso:"stratege", expr:"severe", ambiance:"danger", titre:"Athènes ruinée",
+      texte:"Le trésor est vide. Sans argent, Athènes ne peut plus payer les rameurs de sa flotte, acheter du grain ni défendre ses murs : privée de moyens, la cité s'effondre. À Athènes, la puissance — et la démocratie qu'elle nourrissait — reposaient sur les ressources de la cité et de son empire." }
   },
 
   bilans:[
