@@ -159,13 +159,13 @@ header.tete .sous{font-family:var(--corps);letter-spacing:.02em;font-size:14.5px
 @media(prefers-reduced-motion:reduce){ .revolte-banner{animation:none} }
 
 /* ===== indicateurs de trajectoire (sous les décisions) ===== */
-.axes{margin-top:16px;display:flex;flex-direction:column;gap:13px;
-  padding:13px 15px 15px;background:rgba(251,247,239,.72);
+.axes{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:11px 26px;
+  align-items:start;padding:13px 16px 15px;background:rgba(251,247,239,.72);
   border:1.5px solid var(--pierre-bord);border-radius:var(--rayon)}
-.axes-tete{font-family:var(--display,var(--corps));font-size:12.5px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--encre-doux);font-weight:700;margin-bottom:1px}
-.axe-poles{display:flex;justify-content:space-between;font-size:12px;
-  letter-spacing:.04em;font-weight:700;margin-bottom:5px}
+.axes-tete{grid-column:1/-1;font-family:var(--display,var(--corps));font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--encre-doux);font-weight:700;margin-bottom:1px}
+.axe-poles{display:flex;justify-content:space-between;font-size:11.5px;
+  letter-spacing:.03em;font-weight:700;margin-bottom:5px}
 .axe-pole-g{color:var(--pompei)} .axe-pole-d{color:var(--olive)}
 .axe-rail{position:relative;height:9px;border-radius:5px;
   border:1px solid var(--pierre-bord)}
@@ -174,7 +174,8 @@ header.tete .sous{font-family:var(--corps);letter-spacing:.02em;font-size:14.5px
 .axe-marqueur{position:absolute;top:50%;width:17px;height:17px;border-radius:50%;
   background:var(--parchemin);border:3px solid var(--encre);
   transform:translate(-50%,-50%);box-shadow:0 1px 3px rgba(58,46,38,.32);
-  transition:left .45s cubic-bezier(.2,.7,.2,1)}
+  transition:left .55s cubic-bezier(.2,.75,.25,1)}
+@media(max-width:620px){ .axes{grid-template-columns:1fr;gap:12px} }
 @media(prefers-reduced-motion:reduce){ .axe-marqueur{transition:none} }
 
 

@@ -15,7 +15,7 @@
     piece:'<circle cx="12" cy="12" r="9" fill="#3A2E26"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="#F2E7CF" stroke-width="1.1"/><path d="M13.5 8.5 C10 8 9.5 11 12 11.6 C14.5 12.2 14 15.4 10.6 15" fill="none" stroke="#F2E7CF" stroke-width="1.3" stroke-linecap="round"/>'
   };
 
-  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, finForcee, DIFF;
+  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, finForcee, axesPrec, DIFF;
   var GEN_VERROU=0;   // jeton de génération : invalide un compte à rebours quand la scène change
   var journal=[];     // journal du mandat : une entrée par décision (pour le bilan de fin)
   var aConnuRevolte=false;  // au moins une révolte a éclaté durant le mandat ?
@@ -28,7 +28,7 @@
     return (G.difficultes && G.difficultes[G.difficultes.defaut||"legat"]) ||
            { nom:"Légat", seuilRevolte:30, seuilPaix:42, attenuation:0.5, bleed:2, revenuMod:1, malusActeMod:1 };
   }
-  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; finForcee=null; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
+  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; finForcee=null; axesPrec=null; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
 
   function el(s){ return document.querySelector(s); }
   function creer(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
@@ -86,22 +86,31 @@
 
   /* ---------- indicateurs de trajectoire (sous les décisions) ---------- */
   // Deux axes de lecture : régime (oligarchie ↔ démocratie) et indépendance (soumission ↔ liberté).
-  function unAxe(gauche, droite, val, cls){
+  function unAxe(gauche, droite, valStart, cls){
     var a=creer("div","axe");
     var poles=creer("div","axe-poles");
     poles.appendChild(creer("span","axe-pole-g",esc(gauche)));
     poles.appendChild(creer("span","axe-pole-d",esc(droite)));
     a.appendChild(poles);
     var rail=creer("div","axe-rail "+cls);
-    var marq=creer("div","axe-marqueur"); marq.style.left=clamp(val,0,100)+"%";
+    var marq=creer("div","axe-marqueur"); marq.style.left=clamp(valStart,0,100)+"%";
     rail.appendChild(marq); a.appendChild(rail);
-    return a;
+    return { node:a, marq:marq };
   }
   function rendreAxes(){
+    var curRom=etat.romanisation, curLib=(etat.liberte!=null?etat.liberte:50);
+    // départ à la dernière position affichée, pour que le curseur glisse jusqu'à la nouvelle
+    var startRom=axesPrec?axesPrec.rom:curRom, startLib=axesPrec?axesPrec.lib:curLib;
     var box=creer("div","axes");
     box.appendChild(creer("div","axes-tete","Où mène ton gouvernement ?"));
-    box.appendChild(unAxe("Oligarchie","Démocratie", etat.romanisation, "dem"));
-    box.appendChild(unAxe("Soumission","Liberté", (etat.liberte!=null?etat.liberte:50), "lib"));
+    var d=unAxe("Oligarchie","Démocratie", startRom, "dem");
+    var l=unAxe("Soumission","Liberté", startLib, "lib");
+    box.appendChild(d.node); box.appendChild(l.node);
+    if(startRom!==curRom || startLib!==curLib){
+      // léger délai : la scène s'affiche, puis le curseur glisse visiblement
+      setTimeout(function(){ d.marq.style.left=clamp(curRom,0,100)+"%"; l.marq.style.left=clamp(curLib,0,100)+"%"; }, 300);
+    }
+    axesPrec={ rom:curRom, lib:curLib };
     return box;
   }
 
