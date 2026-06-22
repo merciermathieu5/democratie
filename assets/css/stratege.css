@@ -644,3 +644,39 @@ header.tete{ display:none; }                 /* titre porté par l'accueil + l'o
   .chip-traj,.mini-chip{border-color:#000 !important;color:#000 !important;background:#fff !important}
   *{box-shadow:none !important}
 }
+
+/* =========================================================================
+   SIGNATURE DE L'AUTEUR (pied de page)
+   Bandeau « paternité de l'interface » harmonisé au thème BD antique.
+   Repère antique : frise à la grecque (méandre) en filet supérieur.
+   ========================================================================= */
+.signature{margin-top:6px;border-top:2px solid var(--pierre-bord);
+  background:linear-gradient(180deg,var(--parchemin),var(--pierre));}
+.signature .meandre{height:16px;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16' viewBox='0 0 20 16'%3E%3Cpath d='M0,14 H20 M3,14 V4 H15 V11 H8 V7 H12' fill='none' stroke='%23A9803C' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-position:center top;}
+.sig-inner{max-width:1180px;margin:0 auto;padding:14px 22px 78px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.sig-logo{height:46px;width:auto;flex:none;background:#fff;
+  padding:6px 9px;border-radius:var(--rayon);border:1px solid var(--pierre-bord);
+  box-shadow:0 1px 3px rgba(58,46,38,.12);}
+.sig-txt{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px;}
+.sig-nom{font-family:var(--display);font-weight:700;letter-spacing:.06em;
+  font-size:18px;color:var(--encre);line-height:1.15;}
+.sig-role{font-size:12.5px;color:var(--encre-doux);letter-spacing:.01em;}
+.sig-contact{flex:none;display:inline-flex;align-items:center;gap:7px;
+  background:var(--pourpre);color:#FBF7EF;text-decoration:none;
+  font-family:var(--corps);font-weight:600;font-size:14px;letter-spacing:.02em;
+  padding:9px 16px;border-radius:var(--rayon);border:2px solid var(--pourpre-fonce);
+  box-shadow:0 2px 0 rgba(58,46,38,.18);
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;}
+.sig-contact:hover{background:var(--pourpre-fonce);transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(58,46,38,.2);}
+.sig-contact:focus-visible{outline:3px solid var(--bronze);outline-offset:2px;}
+.sig-contact svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+@media (max-width:560px){
+  .sig-inner{flex-direction:column;align-items:flex-start;gap:12px;padding-bottom:74px;}
+  .sig-contact{align-self:stretch;justify-content:center;}
+}
+@media (prefers-reduced-motion:reduce){.sig-contact{transition:none;}}
