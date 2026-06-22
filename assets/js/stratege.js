@@ -37,7 +37,7 @@
   function classeSeuil(v){ return v>=50?"ok":(v>=25?"moyen":"bas"); }
   function persoSrc(role,expr){ return "assets/img/perso/"+role+"-"+expr+".svg"; }
   function docSrc(d){ return "assets/img/"+d+".svg"; }
-  var DOCLEG = { acropole:"L'Acropole d'Athènes", pnyx:"L'assemblée du peuple", mines:"Les mines d'argent du Laurion", marathon:"La bataille de Marathon", delos:"L'alliance des cités", commerce:"Le commerce au Pirée", ostracisme:"L'ostracisme", sparte:"Sparte et ses alliés", oligarchie:"Le pouvoir de quelques-uns" };
+  var DOCLEG = { acropole:"L'Acropole d'Athènes", pnyx:"L'assemblée du peuple", mines:"Les mines d'argent du Laurion", marathon:"La bataille de Marathon", delos:"L'alliance des cités", commerce:"Le commerce au Pirée", ostracisme:"L'ostracisme", sparte:"Sparte et ses alliés", oligarchie:"Le pouvoir de quelques-uns", remparts:"Les Longs Murs vers le Pirée", agora:"L'Agora d'Athènes", sculpteurs:"Les sculpteurs d'Athènes" };
 
   function bilanRevenu(){
     var commerce=0, entretien=0;

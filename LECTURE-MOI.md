@@ -9,7 +9,7 @@ démocratie. Même mécanique que *Legatus* — mais le sens politique est **inv
 dans Legatus, le pouvoir vient d'en haut (l'empereur peut te rappeler) ; ici, il
 vient **d'en bas** (le peuple peut te chasser du pouvoir).
 
-> **Jeu complet : 20 décisions en 5 actes**, de la naissance de la démocratie
+> **Jeu complet : 24 décisions en 5 actes**, de la naissance de la démocratie
 > (Clisthène) à la fin de l'hégémonie athénienne (404-403 av. J.-C.), en passant
 > par les guerres médiques, l'âge d'or de Périclès et la guerre du Péloponnèse.
 
@@ -32,7 +32,7 @@ Double-clique `index.html` — aucun serveur requis, fonctionne hors-ligne.
 Comme dans Legatus, **l'option qui fait le plus avancer une jauge coûte presque
 toujours ailleurs**. On ne maximise pas tout : la maîtrise, c'est l'équilibre.
 
-## Les cinq actes (20 décisions)
+## Les cinq actes (24 décisions)
 
 **Acte I — Donner le pouvoir au peuple** : les dettes des paysans (Solon) · qui
 peut voter · la réforme de Clisthène · l'assemblée du peuple (l'ecclésia).
@@ -42,7 +42,11 @@ trières (Thémistocle, financée par les mines du Laurion) · Salamine (Xerxès
 fonder la Ligue de Délos.
 
 **Acte III — L'âge d'or de Périclès** : payer les citoyens pour qu'ils participent
-(le misthos) · bâtir le Parthénon · le port du Pirée et les métèques · l'ostracisme.
+(le misthos) · bâtir le Parthénon · embellir l'Acropole (les Propylées) · le
+quartier des sculpteurs · améliorer l'Agora · les Longs Murs jusqu'au Pirée · le
+port du Pirée et les métèques · l'ostracisme. *(C'est l'acte des grands travaux :
+la plupart de ces décisions coûtent de l'argent — le trésor se gagne par l'empire
+et le commerce, et se dépense ici en culture et en infrastructures.)*
 
 **Acte IV — Tenir l'empire** : une cité alliée se révolte (Samos) · les tensions
 avec Sparte (Mégare) · la guerre du Péloponnèse éclate (431) · la peste et les

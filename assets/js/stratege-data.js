@@ -1,6 +1,6 @@
 /* =========================================================================
    DEMOKRATIA — Gouverner Athènes au nom du peuple
-   JEU COMPLET : 20 décisions en 5 actes, de la naissance de la démocratie
+   JEU COMPLET : 24 décisions en 5 actes, de la naissance de la démocratie
    (Clisthène) à la fin de l'hégémonie athénienne (404-403 av. J.-C.).
    Réalité sociale : « Une première expérience de démocratie » (HEC, 1re sec.).
    Langage volontairement simple (élèves de 12-13 ans). Les textes des
@@ -37,7 +37,7 @@ window.STRATEGE = {
     etapesAide:[
       "Avant chaque décision, lis les DEUX documents à droite : un point de vue, puis un autre.",
       "Chaque choix fait avancer (ou reculer) la démocratie, la paix dans la cité, le soutien du peuple et l'argent.",
-      "20 décisions en 5 actes : la naissance de la démocratie, les guerres médiques, l'âge d'or de Périclès, la guerre du Péloponnèse, puis la fin de l'hégémonie."
+      "24 décisions en 5 actes : la naissance de la démocratie, les guerres médiques, l'âge d'or de Périclès, la guerre du Péloponnèse, puis la fin de l'hégémonie."
     ],
     pedagoTitre:"Contexte pédagogique",
     pedago:[
@@ -252,15 +252,91 @@ window.STRATEGE = {
       source2:{ texte:"Pour payer ces travaux, Athènes utilise l'argent que les cités alliées versent pour la défense commune. Beaucoup d'alliés trouvent injuste de financer la gloire d'Athènes." },
       contexte:"Périclès veut couvrir l'Acropole de temples magnifiques, dont le Parthénon : du travail pour des milliers d'Athéniens et la gloire pour la cité. Mais avec quel argent ?",
       options:[
-        { label:"Financer le Parthénon avec l'argent des alliés", cout:10, effets:{ romanisation:6, stabilite:-7, faveur:9 }, persistant:{ tresor:-2 },
+        { label:"Financer le Parthénon avec l'argent des alliés", cout:15, effets:{ romanisation:6, stabilite:-7, faveur:9 }, persistant:{ tresor:-2 },
           consequence:"L'Acropole resplendit, les Athéniens ont du travail et sont fiers. Mais les alliés, dépouillés, en gardent une rancune profonde.",
           pourquoi:"Le programme de Périclès fait la gloire d'Athènes, mais détourner l'argent des alliés transforme l'alliance en empire et prépare la guerre." },
-        { label:"Bâtir plus modestement, avec l'argent d'Athènes", cout:45, effets:{ romanisation:3, stabilite:1, faveur:4 },
+        { label:"Bâtir plus modestement, avec l'argent d'Athènes", cout:65, effets:{ romanisation:3, stabilite:1, faveur:4 },
           consequence:"Des temples plus simples, payés par la cité. Moins de gloire, mais les alliés ne sont pas lésés.",
           pourquoi:"Construire avec ses propres moyens évite de fâcher les alliés, mais Athènes brille moins." },
         { label:"Renoncer aux grands travaux", effets:{ romanisation:-2, stabilite:2, faveur:-5 },
           consequence:"Pas de grands monuments. Le peuple, privé de travail et de fierté, est déçu.",
           pourquoi:"Sans le grand chantier, Athènes manque son âge d'or culturel." }
+      ]
+    },
+    {
+      type:"construction", revenuApres:true, id:"propylees", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"stratege", expr:"content", ambiance:"jour", nom:"Périclès, le stratège", document:"acropole",
+      titre:"Embellir l'Acropole (les Propylées)",
+      source:{ texte:"Les Propylées forment une entrée de marbre majestueuse. Avec ses temples, l'Acropole devient la plus belle colline sacrée de toute la Grèce." },
+      source2:{ texte:"Ces chantiers donnent du travail à des milliers d'Athéniens et d'artisans, mais ils coûtent très cher au trésor de la cité." },
+      contexte:"Après le Parthénon, Périclès veut achever l'Acropole : une entrée monumentale en marbre (les Propylées) et d'autres temples. C'est magnifique, mais cher.",
+      options:[
+        { label:"Achever l'Acropole : Propylées et nouveaux temples", cout:90, effets:{ romanisation:4, stabilite:1, faveur:7 },
+          consequence:"L'Acropole est achevée, splendide. Les Athéniens ont du travail et une immense fierté.",
+          pourquoi:"Les grands travaux de Périclès emploient le peuple et font rayonner Athènes : c'est le cœur de son âge d'or." },
+        { label:"Quelques embellissements modestes", cout:40, effets:{ romanisation:2, faveur:3 },
+          consequence:"Des travaux plus modestes. L'Acropole gagne un peu en beauté.",
+          pourquoi:"Embellir un peu suffit à la fierté de la cité, sans vider le trésor." },
+        { label:"Laisser l'Acropole telle quelle", effets:{ romanisation:-1, stabilite:1, faveur:-4 },
+          consequence:"Pas de nouveaux travaux. Le peuple, privé d'emploi et de fierté, est déçu.",
+          pourquoi:"Renoncer aux grands travaux, c'est manquer l'âge d'or culturel d'Athènes." }
+      ]
+    },
+    {
+      type:"construction", revenuApres:true, id:"sculpteurs", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"marchand", expr:"content", ambiance:"jour", nom:"Un sculpteur métèque", document:"sculpteurs",
+      titre:"Le quartier des sculpteurs",
+      source:{ texte:"Les sculpteurs, souvent des métèques, créent des statues admirées dans toute la Grèce. Leurs ateliers emploient beaucoup d'artisans." },
+      source2:{ texte:"L'art glorifie la cité et les dieux. Mais certains disent que cet argent pourrait plutôt nourrir les pauvres." },
+      contexte:"Athènes attire les meilleurs sculpteurs de Grèce, comme Phidias. Tu peux financer tout un quartier d'ateliers pour orner la cité de statues.",
+      options:[
+        { label:"Financer un grand quartier d'ateliers", cout:65, effets:{ romanisation:3, stabilite:1, faveur:6 }, persistant:{ tresor:1 },
+          consequence:"Les ateliers bourdonnent. Athènes se couvre de statues admirées partout, et les artisans prospèrent.",
+          pourquoi:"En soutenant les arts, Athènes rayonne et fait vivre ses artisans, dont beaucoup de métèques." },
+        { label:"Commander seulement quelques statues", cout:35, effets:{ romanisation:1, faveur:3 },
+          consequence:"Quelques belles statues ornent la cité. Un effort mesuré.",
+          pourquoi:"Commander quelques œuvres embellit la cité sans grande dépense." },
+        { label:"Ne rien dépenser pour l'art", effets:{ romanisation:-1, faveur:-3 },
+          consequence:"Pas de nouvelles œuvres. Athènes reste moins éclatante que ses rivales.",
+          pourquoi:"Sans soutien aux arts, Athènes perd une part de son prestige." }
+      ]
+    },
+    {
+      type:"construction", revenuApres:true, id:"agora", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"citoyen", expr:"neutre", ambiance:"jour", nom:"Un citoyen d'Athènes", document:"agora",
+      titre:"Améliorer l'Agora",
+      source:{ texte:"L'Agora est le centre de la vie publique : on y fait le marché, on y rend la justice, on y discute des affaires de la cité." },
+      source2:{ texte:"L'embellir de galeries couvertes (les stoas) et de fontaines rend la vie commune plus agréable et plus active — mais cela demande de l'argent." },
+      contexte:"L'Agora est le cœur d'Athènes : marché, tribunaux, lieu de rencontre des citoyens. Tu peux la rénover avec des galeries, des fontaines et de nouveaux bâtiments publics.",
+      options:[
+        { label:"Grande rénovation : stoas, fontaines, tribunaux", cout:75, effets:{ romanisation:4, stabilite:2, faveur:5 }, persistant:{ tresor:2 },
+          consequence:"L'Agora rénovée déborde de vie : marché, débats, justice. La cité respire et commerce mieux.",
+          pourquoi:"Une Agora vivante, c'est le cœur de la vie démocratique et du commerce d'Athènes." },
+        { label:"Quelques réparations utiles", cout:35, effets:{ romanisation:1, stabilite:1 }, persistant:{ tresor:1 },
+          consequence:"L'Agora est entretenue, sans plus. La vie publique continue.",
+          pourquoi:"Entretenir l'Agora suffit au quotidien, mais sans en faire un grand lieu." },
+        { label:"Laisser l'Agora se dégrader", effets:{ romanisation:-2, stabilite:-1, faveur:-2 },
+          consequence:"L'Agora vieillit et se vide peu à peu. La vie publique en souffre.",
+          pourquoi:"Négliger l'Agora, c'est négliger le lieu même où vit la démocratie." }
+      ]
+    },
+    {
+      type:"construction", revenuApres:true, id:"longs_murs", acte:"Acte III : L'âge d'or de Périclès",
+      perso:"stratege", expr:"neutre", ambiance:"jour", nom:"Périclès, le stratège", document:"remparts",
+      titre:"Les Longs Murs jusqu'au Pirée",
+      source:{ texte:"Les Longs Murs relient la ville au Pirée. Même assiégée sur terre, Athènes reste nourrie et approvisionnée par sa flotte." },
+      source2:{ texte:"Ce mur géant repose sur la marine — c'est-à-dire sur les rameurs, souvent les plus pauvres. Il renforce la puissance navale et le rôle du peuple." },
+      contexte:"Périclès propose de relier Athènes à son port, le Pirée, par deux longues murailles fortifiées : même encerclée, la cité pourrait toujours être ravitaillée par la mer. C'est un chantier énorme.",
+      options:[
+        { label:"Construire les deux Longs Murs jusqu'au Pirée", cout:100, effets:{ romanisation:5, stabilite:6, faveur:4 },
+          consequence:"Athènes et son port ne font plus qu'un. La cité est imprenable tant que sa flotte tient la mer.",
+          pourquoi:"Les Longs Murs lient la cité à sa flotte : ils protègent Athènes et renforcent le rôle des plus pauvres, qui rament sur les navires." },
+        { label:"Un seul mur, plus court", cout:55, effets:{ romanisation:2, stabilite:3, faveur:2 },
+          consequence:"Une muraille protège en partie la route du port. Mieux que rien.",
+          pourquoi:"Un mur partiel offre une protection limitée, à moindre coût." },
+        { label:"Ne pas construire de murailles", effets:{ romanisation:-1, stabilite:-4, faveur:-2 },
+          consequence:"Sans Longs Murs, un siège pourrait couper Athènes de son port et l'affamer.",
+          pourquoi:"Sans lien fortifié vers le Pirée, Athènes reste vulnérable à un blocus terrestre." }
       ]
     },
     {
@@ -272,7 +348,7 @@ window.STRATEGE = {
       contexte:"Le Pirée, le port d'Athènes, est devenu le plus grand marché de la Méditerranée. Beaucoup d'étrangers (les métèques) y vivent et y commercent. Quelle place leur donner ?",
       revenuApres:true,
       options:[
-        { label:"Accueillir largement les métèques et développer le commerce", effets:{ romanisation:2, stabilite:2, faveur:2 }, persistant:{ tresor:7 },
+        { label:"Accueillir largement les métèques et développer le commerce", effets:{ romanisation:2, stabilite:2, faveur:2 }, persistant:{ tresor:4 },
           consequence:"Le Pirée déborde d'activité. Athènes s'enrichit grâce aux étrangers. La cité prospère.",
           pourquoi:"Les métèques font la prospérité d'Athènes. Mais, exclus de la vie politique, ils montrent une limite de la démocratie." },
         { label:"Les accepter, sans toucher aux privilèges des citoyens", effets:{ romanisation:1, stabilite:1 }, persistant:{ tresor:3 },
@@ -453,7 +529,7 @@ window.STRATEGE = {
     },
     {
       type:"evenement", id:"restauration", acte:"Acte V : La fin de l'hégémonie",
-      perso:"citoyen", expr:"content", ambiance:"jour", nom:"Un citoyen d'Athènes", document:"pnyx",
+      perso:"citoyen", expr:"severe", ambiance:"solennel", nom:"Un citoyen d'Athènes", document:"pnyx",
       titre:"Rétablir la démocratie",
       source:{ texte:"Les Trente, soutenus par Sparte, gouvernent par la violence et tuent leurs adversaires. Beaucoup d'Athéniens fuient en exil." },
       source2:{ texte:"Des exilés démocrates reviennent en armes, renversent les Trente et rétablissent la démocratie dès l'année suivante. L'idée du pouvoir du peuple survit à la défaite." },
@@ -473,7 +549,7 @@ window.STRATEGE = {
     }
   ],
 
-  revenu:{ socle:8, parRomanisation:0.18, seuil:45, facteurInstable:0.5, texte:"L'argent de la cité" },
+  revenu:{ socle:5, parRomanisation:0.10, seuil:45, facteurInstable:0.5, texte:"L'argent de la cité" },
 
   /* Choix qui ne respectent pas l'information des documents : { idÉtape : { indiceOption : note } }.
      PREMIÈRE PASSE — à réviser selon ton jugement. */
@@ -488,6 +564,10 @@ window.STRATEGE = {
     delos:{ 1:"Le second document avertissait qu'une alliance transformée en empire fâcherait Sparte et mènerait un jour à la guerre." },
     misthos:{ 2:"Le document montrait que sans indemnité les pauvres ne peuvent pas participer : ne rien payer gardait la démocratie réservée aux riches." },
     parthenon:{ 0:"Le second document avertissait que prendre l'argent des alliés les révolterait : financer la gloire d'Athènes avec leur tribut préparait la guerre." },
+    propylees:{ 2:"Le document montrait que ces grands travaux emploient le peuple et font la gloire d'Athènes : ne rien faire privait la cité de son âge d'or." },
+    sculpteurs:{ 2:"Le document montrait que les arts font rayonner Athènes et vivre ses artisans : ne rien dépenser pour l'art lui faisait perdre son prestige." },
+    agora:{ 2:"Le document montrait que l'Agora est le cœur de la vie publique : la laisser se dégrader nuisait à la démocratie et au commerce." },
+    longs_murs:{ 2:"Le document avertissait que sans lien fortifié vers le Pirée, un siège pouvait affamer Athènes : ne rien construire la laissait vulnérable." },
     piree:{ 2:"Les documents montraient que les métèques font la richesse d'Athènes : limiter les étrangers privait la cité de cette prospérité." },
     ostracisme:{ 2:"Le document avertissait que l'ostracisme peut servir à éliminer des rivaux honnêtes : t'en servir contre tes adversaires en abusait." },
     revolte_alliee:{ 0:"Les documents montraient qu'écraser les alliés nourrit la haine et inquiète Sparte : la force seule préparait la guerre." },
