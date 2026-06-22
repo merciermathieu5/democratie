@@ -110,13 +110,21 @@
     var reduit=(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     var duree=(typeof ms==="number" && ms>0) ? ms : 0;
     if(bouge && duree>0 && !reduit){
-      // le curseur glisse pendant tout le temps de lecture (synchronisé avec le décompte avant déverrouillage)
-      d.marq.style.transition="left "+duree+"ms linear";
-      l.marq.style.transition="left "+duree+"ms linear";
+      // le curseur part de l'ancienne position SANS transition (figée par un reflow),
+      // puis glisse vers la nouvelle pendant tout le temps de lecture.
+      d.marq.style.transition="none"; l.marq.style.transition="none";
+      var finRom=clamp(curRom,0,100)+"%", finLib=clamp(curLib,0,100)+"%";
       setTimeout(function(){
-        d.marq.style.left=clamp(curRom,0,100)+"%";
-        l.marq.style.left=clamp(curLib,0,100)+"%";
-      }, 60);
+        // 1) fige la position de départ
+        void d.marq.offsetWidth; void l.marq.offsetWidth;
+        // 2) arme la transition synchronisée sur la durée du verrou
+        d.marq.style.transition="left "+duree+"ms linear";
+        l.marq.style.transition="left "+duree+"ms linear";
+        // 3) lance le glissement à la frame suivante (garantit le déclenchement)
+        requestAnimationFrame(function(){
+          d.marq.style.left=finRom; l.marq.style.left=finLib;
+        });
+      }, 220);
     } else {
       d.marq.style.left=clamp(curRom,0,100)+"%";
       l.marq.style.left=clamp(curLib,0,100)+"%";
