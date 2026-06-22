@@ -671,7 +671,7 @@
     catch(e){ date=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
     var box=creer("div","print-entete");
     box.innerHTML=
-      '<div class="pe-haut"><span class="pe-titre">Bilan de mandat — Stratège</span>'+
+      '<div class="pe-haut"><span class="pe-titre">Bilan de mandat — Demokratia</span>'+
       '<span class="pe-niveau">Niveau : '+esc((DIFF&&DIFF.nom)||"")+'</span></div>'+
       '<div class="pe-ligne"><span>Nom : ______________________________</span>'+
       '<span>Date : '+esc(date)+'</span></div>';

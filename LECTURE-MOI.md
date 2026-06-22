@@ -1,4 +1,4 @@
-# Stratège — Gouverner Athènes au nom du peuple
+# Demokratia — Gouverner Athènes au nom du peuple
 
 Jeu sérieux pour le premier cycle du secondaire (Histoire et éducation à la
 citoyenneté, 1ʳᵉ secondaire). Réalité sociale : **« Une première expérience de

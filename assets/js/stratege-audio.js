@@ -1,8 +1,10 @@
 /* =========================================================================
-   LEGATUS — trame sonore en boucle
-   Lecture en boucle d'une pièce de cuivres romaine (montée à partir de deux
-   extraits, fondus aux jonctions). Pas de variation d'intensité : un fond
-   constant. Démarre au premier clic (règles des navigateurs) ; bouton muet.
+   STRATÈGE — trame sonore en boucle
+   Lecture en boucle d'un extrait de lyre grecque (~50 s, jonction fondue de 3 s
+   pour une boucle sans coupure). Fond constant. Démarre au premier clic (règles
+   des navigateurs) ; bouton muet.
+   Musique : « The Lyre of Classical Antiquity », Michael Levy.
+   ⚠ Vérifier les droits d'utilisation avant toute diffusion publique du jeu.
    ========================================================================= */
 window.AudioStratege = (function(){
   "use strict";

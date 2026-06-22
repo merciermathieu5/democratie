@@ -1,5 +1,5 @@
 /* =========================================================================
-   STRATÈGE — Gouverner Athènes au nom du peuple
+   DEMOKRATIA — Gouverner Athènes au nom du peuple
    JEU COMPLET : 20 décisions en 5 actes, de la naissance de la démocratie
    (Clisthène) à la fin de l'hégémonie athénienne (404-403 av. J.-C.).
    Réalité sociale : « Une première expérience de démocratie » (HEC, 1re sec.).
@@ -13,7 +13,7 @@
    mais s'affichent « Démocratie / Paix sociale / Soutien du peuple / Trésor ».
    ========================================================================= */
 window.STRATEGE = {
-  titre:"Stratège", sousTitre:"Gouverner Athènes au nom du peuple",
+  titre:"Demokratia", sousTitre:"Gouverner Athènes au nom du peuple",
   delaiLecture:6,
   etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:90 },
 
@@ -25,8 +25,8 @@ window.STRATEGE = {
   ],
 
   accueil:{
-    titre:"Stratège", sousTitre:"Gouverner Athènes au nom du peuple",
-    accroche:"Tu diriges Athènes au 5ᵉ siècle avant notre ère. Vas-tu réussir à donner le pouvoir au peuple — la démocratie — tout en gardant la cité en paix ?",
+    titre:"Demokratia", sousTitre:"Gouverner Athènes au nom du peuple",
+    accroche:"Tu diriges Athènes au 5ᵉ siècle avant notre ère. Vas-tu réussir à donner le pouvoir au peuple tout en gardant la cité en paix ?",
     commentTitre:"Comment ça marche",
     jaugesAide:[
       { icone:"temple",   nom:"Démocratie",       txt:"ta mission : donner le pouvoir au peuple" },
@@ -42,7 +42,7 @@ window.STRATEGE = {
     pedagoTitre:"Contexte pédagogique",
     pedago:[
       "Histoire et éducation à la citoyenneté, 1ʳᵉ secondaire.",
-      "Réalité sociale : « Une première expérience de démocratie » (Athènes, 5ᵉ siècle av. J.-C.)."
+      "Réalité sociale : « Une première expérience de démocratie »."
     ],
     diffTitre:"Choisis ton niveau pour commencer"
   },
@@ -530,7 +530,7 @@ window.STRATEGE = {
       texte:"La démocratie athénienne a fleuri et, malgré les épreuves et la défaite, l'idée du pouvoir du peuple survit. Quelques fractures demeurent, mais l'essentiel a tenu." },
     { si:{ romanisation:36 }, perso:"conseiller", expr:"neutre", ambiance:"jour",
       titre:"Une démocratie fragile",
-      texte:"Le peuple a goûté au pouvoir, mais l'expérience est restée fragile : tu as parfois reculé, cédé à la démagogie, ou laissé la cité se déchirer." },
+      texte:"Le peuple a goûté au pouvoir, mais l'expérience est restée fragile : tu as parfois reculé, cédé à la démagogie et laissé la cité se déchirer." },
     { si:{}, perso:"citoyen", expr:"severe", ambiance:"jour",
       titre:"L'oligarchie l'emporte",
       texte:"Le pouvoir du peuple n'a pas tenu. Écrasée par la guerre et reprise par quelques familles riches, la démocratie athénienne s'est éteinte." }
