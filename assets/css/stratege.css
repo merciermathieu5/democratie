@@ -649,8 +649,9 @@ header.tete{ display:none; }                 /* titre porté par l'accueil + l'o
    SIGNATURE DE L'AUTEUR (pied de page) — version discrète
    Bandeau « paternité de l'interface », filet à la grecque fin et pâle.
    ========================================================================= */
-.signature{margin-top:4px;border-top:1px solid var(--pierre-bord);
+.signature{display:none;margin-top:4px;border-top:1px solid var(--pierre-bord);
   background:linear-gradient(180deg,var(--parchemin),var(--pierre));}
+body.ecran-depart .signature{display:block;}
 .signature .meandre{height:11px;opacity:.32;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16' viewBox='0 0 20 16'%3E%3Cpath d='M0,14 H20 M3,14 V4 H15 V11 H8 V7 H12' fill='none' stroke='%23A9803C' stroke-width='2'/%3E%3C/svg%3E");
   background-repeat:repeat-x;background-position:center top;background-size:13.75px 11px;}

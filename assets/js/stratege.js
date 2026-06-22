@@ -251,11 +251,13 @@
     }
 
     scene.appendChild(page);
+    document.body.classList.add("ecran-depart");
     window.scrollTo({top:0,behavior:"smooth"});
   }
 
   /* ---------- intro ---------- */
   function intro(){
+    document.body.classList.remove("ecran-depart");
     init(); rendreJauges();
     var I=G.intro;
     var bas=creer("div","intro-bas");
