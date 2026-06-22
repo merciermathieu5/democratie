@@ -93,9 +93,27 @@
     poles.appendChild(creer("span","axe-pole-d",esc(droite)));
     a.appendChild(poles);
     var rail=creer("div","axe-rail "+cls);
-    var marq=creer("div","axe-marqueur"); marq.style.left=clamp(valStart,0,100)+"%";
+    var marq=creer("div","axe-marqueur");
+    marq.style.transition="none";                 // on anime en JS, pas par transition CSS
+    marq.style.left=clamp(valStart,0,100)+"%";
     rail.appendChild(marq); a.appendChild(rail);
     return { node:a, marq:marq };
+  }
+  // Glissement maison, image par image : indépendant des transitions CSS
+  // (donc insensible au réglage « réduire les animations » qui désactive les transitions).
+  function glisser(marq, from, to, duree){
+    from=clamp(from,0,100); to=clamp(to,0,100);
+    marq.style.left=from+"%";
+    var t0=null;
+    function step(ts){
+      if(!marq.isConnected) return;               // marqueur remplacé par une nouvelle décision
+      if(t0===null) t0=ts;
+      var p=Math.min(1,(ts-t0)/duree);
+      marq.style.left=(from+(to-from)*p).toFixed(2)+"%";
+      if(p<1) requestAnimationFrame(step);
+    }
+    // court délai pour que la décision s'affiche, puis glissement sur toute la durée de lecture
+    setTimeout(function(){ requestAnimationFrame(step); }, 180);
   }
   function rendreAxes(ms){
     var curRom=etat.romanisation, curLib=(etat.liberte!=null?etat.liberte:50);
@@ -106,29 +124,11 @@
     var d=unAxe("Oligarchie","Démocratie", startRom, "dem");
     var l=unAxe("Soumission","Liberté", startLib, "lib");
     box.appendChild(d.node); box.appendChild(l.node);
-    var bouge=(startRom!==curRom || startLib!==curLib);
-    var reduit=(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     var duree=(typeof ms==="number" && ms>0) ? ms : 0;
-    if(bouge && duree>0 && !reduit){
-      // le curseur part de l'ancienne position SANS transition (figée par un reflow),
-      // puis glisse vers la nouvelle pendant tout le temps de lecture.
-      d.marq.style.transition="none"; l.marq.style.transition="none";
-      var finRom=clamp(curRom,0,100)+"%", finLib=clamp(curLib,0,100)+"%";
-      setTimeout(function(){
-        // 1) fige la position de départ
-        void d.marq.offsetWidth; void l.marq.offsetWidth;
-        // 2) arme la transition synchronisée sur la durée du verrou
-        d.marq.style.transition="left "+duree+"ms linear";
-        l.marq.style.transition="left "+duree+"ms linear";
-        // 3) lance le glissement à la frame suivante (garantit le déclenchement)
-        requestAnimationFrame(function(){
-          d.marq.style.left=finRom; l.marq.style.left=finLib;
-        });
-      }, 220);
-    } else {
-      d.marq.style.left=clamp(curRom,0,100)+"%";
-      l.marq.style.left=clamp(curLib,0,100)+"%";
-    }
+    if(duree>0 && startRom!==curRom) glisser(d.marq, startRom, curRom, duree);
+    else d.marq.style.left=clamp(curRom,0,100)+"%";
+    if(duree>0 && startLib!==curLib) glisser(l.marq, startLib, curLib, duree);
+    else l.marq.style.left=clamp(curLib,0,100)+"%";
     axesPrec={ rom:curRom, lib:curLib };
     return box;
   }
