@@ -72,10 +72,12 @@ autre. Ils sont inspirés du **corpus HEC** de la réalité sociale et du site
 muniverssocial.ca.
 
 > **Sources :** les textes sont des **adaptations** rédigées en mots
-> simples pour des élèves de 12-13 ans — **et non des citations exactes**.
-> À **vérifier et ajuster** avant une évaluation. Tout se modifie dans les champs
-> `source` (Document 1) et `source2` (Document 2) de chaque étape, dans
-> `assets/js/stratege-data.js`.
+> simples pour des élèves de 12-13 ans — **et non des citations exactes**. Pour
+> cette raison, **aucune source n'est affichée** dans le jeu : il vaut mieux pas
+> de référence qu'une fausse. Si tu en as besoin pour une évaluation, ajoute les
+> **vraies sources** de ton corpus en remettant un champ `ref:"…"` dans `source`
+> (Document 1) et `source2` (Document 2) de chaque étape, dans
+> `assets/js/stratege-data.js` (le jeu l'affichera automatiquement).
 
 Un **délai de lecture** (6 s par défaut, réglable via `delaiLecture`) force la
 lecture des documents avant d'ouvrir les choix.

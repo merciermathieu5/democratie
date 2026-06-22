@@ -144,7 +144,7 @@
         var src=creer("div","source");
         src.appendChild(creer("div","src-tete",(d.tete||("Document "+(k+1)))));
         src.appendChild(creer("div","src-txt",esc(d.texte)));
-        src.appendChild(creer("div","src-ref",esc(d.ref)));
+        if(d.ref) src.appendChild(creer("div","src-ref",esc(d.ref)));
         col.appendChild(src);
       });
       row.appendChild(col);
