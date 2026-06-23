@@ -15,7 +15,7 @@
     piece:'<circle cx="12" cy="12" r="9" fill="#3A2E26"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="#F2E7CF" stroke-width="1.1"/><path d="M13.5 8.5 C10 8 9.5 11 12 11.6 C14.5 12.2 14 15.4 10.6 15" fill="none" stroke="#F2E7CF" stroke-width="1.3" stroke-linecap="round"/>'
   };
 
-  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, finForcee, axesPrec, DIFF;
+  var etat, flags, persistants, idx, enRevolte, criseTresor, faillite, finForcee, axesPrec, finie, DIFF;
   var GEN_VERROU=0;   // jeton de génération : invalide un compte à rebours quand la scène change
   var journal=[];     // journal du mandat : une entrée par décision (pour le bilan de fin)
   var aConnuRevolte=false;  // au moins une révolte a éclaté durant le mandat ?
@@ -28,7 +28,7 @@
     return (G.difficultes && G.difficultes[G.difficultes.defaut||"legat"]) ||
            { nom:"Légat", seuilRevolte:30, seuilPaix:42, attenuation:0.5, bleed:2, revenuMod:1, malusActeMod:1 };
   }
-  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; finForcee=null; axesPrec=null; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
+  function init(){ etat=Object.assign({},G.etatInitial); flags={}; persistants=[]; idx=0; enRevolte=false; criseTresor=false; faillite=false; finForcee=null; axesPrec=null; finie=false; journal=[]; aConnuRevolte=false; if(!DIFF)DIFF=diffDefaut(); }
 
   function el(s){ return document.querySelector(s); }
   function creer(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
@@ -59,8 +59,12 @@
   /* ---------- jauges ---------- */
   function rendreJauges(deltas){
     var b=el("#jauges"); b.innerHTML="";
+    var avecMenace=(!finie && etat.pressionSparte>0);
+    b.classList.toggle("avec-menace", avecMenace);
     if(enRevolte) b.appendChild(creer("div","revolte-banner","\u2694 La cité est déchirée : les progrès s'arrêtent et l'argent ne rentre plus"));
     if(criseTresor) b.appendChild(creer("div","revolte-banner","\u26A0 Trésor vide : la cité ne peut plus payer sa flotte ni son grain"));
+    if(avecMenace) b.appendChild(banniereSparte(etat.pressionSparte));
+    var cible = avecMenace ? creer("div","jauges-grille") : b;   // 2×2 à droite de la pression
     G.jauges.forEach(function(j){
       var v=etat[j.id];
       var carte=creer("div","jauge");
@@ -80,8 +84,28 @@
         var txt=(r>=0?"+"+r:""+r)+" dr. / tour"+(enRevolte?" (crise)":"");
         corps.appendChild(creer("div","jauge-revenu"+(r<=0?" nul":""), txt));
       }
-      carte.appendChild(corps); b.appendChild(carte);
+      carte.appendChild(corps); cible.appendChild(carte);
     });
+    if(avecMenace) b.appendChild(cible);
+  }
+
+  /* ---------- pression de Sparte (climax des actes IV-V) ---------- */
+  function banniereSparte(p){
+    p=clamp(p,0,100);
+    var niv = p>=78 ? "haut" : (p>=45 ? "moyen" : "bas");
+    var note = niv==="haut" ? "Sparte est aux portes d'Athènes — l'assaut est imminent"
+             : niv==="moyen" ? "La guerre du Péloponnèse fait rage"
+             : "Sparte surveille la puissance d'Athènes";
+    var box=creer("div","menace-sparte niv-"+niv);
+    var tete=creer("div","menace-tete");
+    tete.appendChild(creer("span","menace-ic","\u039B"));
+    tete.appendChild(creer("span","menace-titre","Pression de Sparte"));
+    tete.appendChild(creer("span","menace-pct",Math.round(p)+" %"));
+    box.appendChild(tete);
+    var rail=creer("div","menace-rail"); var fill=creer("div","menace-fill"); fill.style.width=p+"%";
+    rail.appendChild(fill); box.appendChild(rail);
+    box.appendChild(creer("div","menace-note",esc(note)));
+    return box;
   }
 
   /* ---------- indicateurs de trajectoire (sous les décisions) ---------- */
@@ -360,6 +384,7 @@
       }
     }
     var go=gameOver(); if(go) return finEchec(go);
+    if(e.pressionActe) etat.pressionSparte = Math.max(etat.pressionSparte||0, e.pressionActe);
     son("evenement","acte"); son("refleter", etat, etatSonore());
     rendreJauges(deltas);
     var scene=el("#scene"); scene.innerHTML="";
@@ -504,6 +529,7 @@
                    consequence:opt.consequence+(note?" "+note:""), deltas:Object.assign({},deltas), contreDoc:dAlerte });
     if(opt.flag) flags[opt.flag]=true;
     if(opt.finImposee) finForcee=opt.finImposee;
+    if(opt.pression) etat.pressionSparte = clamp((etat.pressionSparte||0)+opt.pression, 0, 100);
     if(opt.persistant) persistants.push(opt.persistant);
     var revenuTxt="";
     if(e.revenuApres){
@@ -585,12 +611,14 @@
 
   /* ---------- fins ---------- */
   function finEchec(type){
+    finie=true;
     var f=G.echecs[type]; rendreJauges();
     son("evenement","echec");
     var bas=ecranBilan(f, "Fin du mandat");
     rendreScene({ perso:f.perso, expr:f.expr, ambiance:f.ambiance, nom:f.titre, texte:f.texte, html:bas });
   }
   function bilan(){
+    finie=true;
     var c=G.bilans[G.bilans.length-1];
     for(var i=0;i<G.bilans.length;i++){ var cond=G.bilans[i].si, ok=true;
       Object.keys(cond).forEach(function(k){ if(etat[k]<cond[k]) ok=false; }); if(ok){ c=G.bilans[i]; break; } }
@@ -598,6 +626,33 @@
     son("evenement", (etat.romanisation>=70 && etat.faveur>=55 && etat.stabilite>=45) ? "triomphe" : "fin");
     var bas=ecranBilan(c, "Fin du mandat · Bilan");
     rendreScene({ perso:c.perso, expr:c.expr, ambiance:c.ambiance, nom:"Bilan de ton mandat", texte:c.texte, html:bas });
+  }
+
+  // Médaille de fin : emblème colonne (debout = la démocratie tient, brisée = elle tombe)
+  function svgMedaille(niv){
+    var centre = (niv==="sombre")
+      ? '<rect x="31" y="38" width="10" height="8" fill="currentColor"/><rect x="27" y="46" width="18" height="4" fill="currentColor"/><path d="M31 38l3-4 3 4 3-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>'
+      : '<rect x="31" y="27" width="10" height="19" fill="currentColor"/><rect x="27" y="23" width="18" height="4.5" fill="currentColor"/><rect x="27" y="46" width="18" height="4.5" fill="currentColor"/><path d="M33 27v19M37 27v19" stroke="#fff" stroke-width="1" opacity=".45"/>';
+    return '<svg viewBox="0 0 72 72" aria-hidden="true">'
+      + '<circle cx="36" cy="36" r="22" fill="currentColor" opacity=".12"/>'
+      + '<circle cx="36" cy="36" r="22" fill="none" stroke="currentColor" stroke-width="3"/>'
+      + '<path d="M14 51C8 41 9 28 18 21" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>'
+      + '<path d="M14 46l-5-1M13 41l-5-2M14 36l-5-2M16 31l-5-3M19 26l-4-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+      + '<path d="M58 51c6-10 5-23-4-30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>'
+      + '<path d="M58 46l5-1M59 41l5-2M58 36l5-2M56 31l5-3M53 26l4-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+      + centre + '</svg>';
+  }
+  function badgeRang(rang){
+    if(!rang) return null;
+    var niv=rang.niveau||"sombre";
+    var libelle={or:"Médaille d'or",argent:"Médaille d'argent",bronze:"Médaille de bronze",sombre:"Fin du mandat"}[niv]||"";
+    var box=creer("div","badge-rang badge-"+niv);
+    var med=creer("div","badge-medaille"); med.innerHTML=svgMedaille(niv); box.appendChild(med);
+    var txt=creer("div","badge-txt");
+    if(libelle) txt.appendChild(creer("div","badge-niveau",esc(libelle)));
+    txt.appendChild(creer("div","badge-nom",esc(rang.nom)));
+    box.appendChild(txt);
+    return box;
   }
 
   // contenu commun des écrans de fin : en-tête d'impression, verdict, trajectoire, journal, actions
@@ -608,6 +663,7 @@
     tete.appendChild(creer("div","kicker",kicker));
     if(DIFF && DIFF.nom) tete.appendChild(creer("div","bilan-niveau","Niveau : "+esc(DIFF.nom)));
     bas.appendChild(tete);
+    var bg=badgeRang(verdict.rang); if(bg) bas.appendChild(bg);
     bas.appendChild(creer("div","titre-acte",esc(verdict.titre)));
     bas.appendChild(creer("p","verdict-print",esc(verdict.texte)));   // doublon du verdict, imprimé seulement
     var grille=creer("div","bilan-grille");
@@ -667,7 +723,7 @@
       cur.items.push(en);
     });
     groupes.forEach(function(g,gi){
-      var ouvertParDefaut = (gi===0);
+      var ouvertParDefaut = false;
       var grp=creer("div","jacte"+(ouvertParDefaut?" ouvert":""));
       var tete=creer("button","jacte-tete"); tete.type="button";
       tete.setAttribute("aria-expanded", ouvertParDefaut?"true":"false");

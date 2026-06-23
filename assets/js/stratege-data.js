@@ -15,7 +15,7 @@
 window.STRATEGE = {
   titre:"Demokratia", sousTitre:"Gouverner Athènes au nom du peuple",
   delaiLecture:6,
-  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:100, liberte:55 },
+  etatInitial:{ romanisation:8, stabilite:60, faveur:60, tresor:100, liberte:55, pressionSparte:0 },
 
   jauges:[
     { id:"romanisation", nom:"Démocratie",       icone:"temple",  type:"pct", couleur:"pourpre" },
@@ -384,6 +384,7 @@ window.STRATEGE = {
       type:"evenement", id:"revolte_alliee", acte:"Acte IV : Tenir l'empire",
       acteIntro:"L'âge d'or brille, mais la domination d'Athènes sur ses alliés pèse de plus en plus. Sparte, inquiète de la puissance d'Athènes, n'est pas loin. Il va falloir tenir l'empire — et bientôt faire la guerre.",
       acteMalus:{ stabilite:-6 }, acteMalusNote:"Les tensions avec les autres cités grecques s'aggravent (paix sociale −6).",
+      pressionActe:30,
       controleRome:{ seuil:42, rappel:26, malus:8, faveurRappel:18 },
       perso:"stratege", expr:"severe", ambiance:"danger", nom:"Périclès, le stratège", document:"delos",
       titre:"Une cité alliée se révolte",
@@ -412,13 +413,13 @@ window.STRATEGE = {
       contexte:"Sparte et ses alliés voient grandir la puissance d'Athènes avec inquiétude. Athènes pourrait bloquer le commerce d'une cité rivale (Mégare) pour montrer sa force. Que fais-tu ?",
       revenuApres:true,
       options:[
-        { label:"Bloquer le commerce de Mégare pour montrer sa force", effets:{ romanisation:0, stabilite:-9, faveur:4 },
+        { label:"Bloquer le commerce de Mégare pour montrer sa force", pression:12, effets:{ romanisation:0, stabilite:-9, faveur:4 },
           consequence:"Athènes étouffe sa rivale. Mais Sparte et ses alliés y voient une provocation : la guerre se rapproche.",
           pourquoi:"Humilier une alliée de Sparte montre la force d'Athènes, mais précipite la guerre du Péloponnèse." },
-        { label:"Chercher un compromis avec Sparte", effets:{ romanisation:0, stabilite:6, faveur:-2 },
+        { label:"Chercher un compromis avec Sparte", pression:-10, effets:{ romanisation:0, stabilite:6, faveur:-2 },
           consequence:"Tu apaises les tensions. La paix tient encore, au prix d'un peu de fierté.",
           pourquoi:"Négocier avec Sparte retarde la guerre, mais demande à Athènes de modérer son ambition." },
-        { label:"Provoquer Sparte ouvertement", effets:{ romanisation:0, stabilite:-12, faveur:3 },
+        { label:"Provoquer Sparte ouvertement", pression:22, effets:{ romanisation:0, stabilite:-12, faveur:3 },
           consequence:"Tu défies Sparte. La guerre devient inévitable, et Athènes n'est pas prête à tout encaisser.",
           pourquoi:"Chercher l'affrontement avec la plus grande puissance militaire grecque est imprudent : la guerre éclatera dans les pires conditions." }
       ]
@@ -432,13 +433,13 @@ window.STRATEGE = {
       contexte:"La guerre commence (431 av. J.-C.). Sparte a la meilleure armée de terre, Athènes la meilleure flotte. Périclès propose de se protéger derrière les Longs Murs et de compter sur la mer. Acceptes-tu ?",
       revenuApres:true,
       options:[
-        { label:"Suivre la stratégie de Périclès : se protéger et compter sur la flotte", effets:{ romanisation:2, stabilite:-10, faveur:2, liberte:2 }, persistant:{ tresor:-5 },
+        { label:"Suivre la stratégie de Périclès : se protéger et compter sur la flotte", pression:6, effets:{ romanisation:2, stabilite:-10, faveur:2, liberte:2 }, persistant:{ tresor:-5 },
           consequence:"Athènes frappe par la mer et évite la bataille terrestre. Mais entasser toute la population derrière les Longs Murs crée une promiscuité dangereuse : la maladie couve.",
           pourquoi:"La stratégie de Périclès protège des Spartiates, mais réfugier toute l'Attique dans la ville surpeuplée provoque bientôt une terrible épidémie de peste : la paix sociale en souffre lourdement." },
-        { label:"Affronter Sparte sur terre pour défendre les champs", effets:{ romanisation:0, stabilite:-2, faveur:5, liberte:-3 }, persistant:{ tresor:-3 },
+        { label:"Affronter Sparte sur terre pour défendre les champs", pression:10, effets:{ romanisation:0, stabilite:-2, faveur:5, liberte:-3 }, persistant:{ tresor:-3 },
           consequence:"Tes hoplites affrontent l'armée spartiate… et sont battus. Le peuple est content d'avoir résisté, mais l'armée souffre.",
           pourquoi:"Affronter Sparte sur son terrain, c'est se mesurer à la meilleure armée grecque : un choix populaire mais dangereux." },
-        { label:"Chercher tout de suite une paix avec Sparte", effets:{ romanisation:-2, stabilite:4, faveur:-7, liberte:-5 },
+        { label:"Chercher tout de suite une paix avec Sparte", pression:-12, effets:{ romanisation:-2, stabilite:4, faveur:-7, liberte:-5 },
           consequence:"Tu demandes la paix dès le début. La cité est épargnée, mais le peuple crie à la lâcheté.",
           pourquoi:"Demander la paix trop tôt épargne la cité, mais le peuple, fier et belliqueux, n'accepte pas de plier." }
       ]
@@ -458,7 +459,7 @@ window.STRATEGE = {
         { label:"Suivre en partie les meneurs pour calmer la foule", effets:{ romanisation:-4, stabilite:-2, faveur:3 },
           consequence:"Tu cèdes un peu à la pression populaire. La foule est contente, la cité un peu moins sage.",
           pourquoi:"Suivre l'humeur de la foule gagne en popularité, mais éloigne des décisions réfléchies." },
-        { label:"Flatter le peuple et promettre la victoire totale", effets:{ romanisation:-12, stabilite:-4, faveur:7, liberte:-2 },
+        { label:"Flatter le peuple et promettre la victoire totale", pression:8, effets:{ romanisation:-12, stabilite:-4, faveur:7, liberte:-2 },
           consequence:"Tu dis au peuple ce qu'il veut entendre. Il t'acclame — mais la cité fonce vers des décisions dangereuses.",
           pourquoi:"La démagogie — flatter le peuple pour le pouvoir — détourne la démocratie de la raison et prépare les catastrophes." }
       ]
@@ -468,6 +469,7 @@ window.STRATEGE = {
       type:"evenement", id:"sicile", acte:"Acte V : La fin de l'hégémonie",
       acteIntro:"La guerre s'éternise. Le peuple, fatigué et excité par ses meneurs, est prêt aux paris les plus risqués. La démocratie va vivre sa plus grande épreuve.",
       acteMalus:{ stabilite:-6, faveur:-3 }, acteMalusNote:"La guerre épuise la cité (paix sociale −6, soutien −3).",
+      pressionActe:80,
       controleRome:{ seuil:50, rappel:34, malus:9, faveurRappel:22 },
       perso:"citoyen", expr:"content", ambiance:"danger", nom:"Un meneur du peuple",
       titre:"La grande expédition de Sicile",
@@ -482,7 +484,7 @@ window.STRATEGE = {
         { label:"Envoyer une expédition prudente et limitée", effets:{ romanisation:1, stabilite:-3, faveur:2 }, persistant:{ tresor:-6 },
           consequence:"Une expédition mesurée part pour la Sicile. Le risque est réel, mais limité.",
           pourquoi:"Une expédition limitée ménage les forces d'Athènes, mais s'engage tout de même dans une aventure lointaine." },
-        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:60, effets:{ romanisation:-12, stabilite:-16, faveur:6, liberte:-4 }, flag:"desastre_sicile",
+        { label:"Lancer une immense expédition pour conquérir la Sicile", cout:60, pression:12, effets:{ romanisation:-12, stabilite:-16, faveur:6, liberte:-4 }, flag:"desastre_sicile",
           consequence:"Une flotte gigantesque part vers la Sicile… et y est entièrement détruite. Athènes perd des milliers d'hommes et ses navires. Un désastre.",
           pourquoi:"L'expédition de Sicile, poussée par l'orgueil et la flatterie, fut une catastrophe qui brisa la puissance d'Athènes." }
       ]
@@ -593,29 +595,33 @@ window.STRATEGE = {
   },
 
   echecs:{
-    stabilite:{ perso:"citoyen", expr:"severe", ambiance:"danger", titre:"La cité se déchire",
+    stabilite:{ perso:"citoyen", expr:"severe", ambiance:"danger", titre:"La cité se déchire", rang:{ niveau:"sombre", nom:"Cité déchirée" },
       texte:"La paix entre les habitants s'est effondrée : la cité sombre dans la révolte et la violence. Gouverner Athènes, c'est d'abord éviter que la cité ne se déchire." },
-    romanisation:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Le retour de l'oligarchie",
+    romanisation:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Le retour de l'oligarchie", rang:{ niveau:"sombre", nom:"Retour de l'oligarchie" },
       texte:"Tu n'as pas assez donné de pouvoir au peuple. Quelques familles riches reprennent le contrôle d'Athènes : la démocratie n'a pas pris. Ta mission était de bâtir le pouvoir du peuple." },
-    faveur:{ perso:"citoyen", expr:"severe", ambiance:"solennel", titre:"Chassé par le peuple",
+    faveur:{ perso:"citoyen", expr:"severe", ambiance:"solennel", titre:"Chassé par le peuple", rang:{ niveau:"sombre", nom:"Stratège déchu" },
       texte:"Les citoyens n'ont plus confiance en toi. Le peuple te retire le pouvoir et te chasse de la cité. À Athènes, c'est le peuple qui décide — même de ton sort." },
-    tresor:{ perso:"stratege", expr:"severe", ambiance:"danger", titre:"Athènes ruinée",
+    tresor:{ perso:"stratege", expr:"severe", ambiance:"danger", titre:"Athènes ruinée", rang:{ niveau:"sombre", nom:"Cité ruinée" },
       texte:"Le trésor est vide. Sans argent, Athènes ne peut plus payer les rameurs de sa flotte, acheter du grain ni défendre ses murs : privée de moyens, la cité s'effondre. À Athènes, la puissance — et la démocratie qu'elle nourrissait — reposaient sur les ressources de la cité et de son empire." },
-    soumission:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Athènes soumise",
+    soumission:{ perso:"stratege", expr:"severe", ambiance:"solennel", titre:"Athènes soumise", rang:{ niveau:"sombre", nom:"Cité soumise" },
       texte:"En se soumettant à une puissance étrangère, Athènes renonce à sa liberté. Or la démocratie repose sur des citoyens libres : sans indépendance, il n'y a plus de pouvoir du peuple. La cité-État libre cesse d'exister, et la partie s'arrête là." }
   },
 
   bilans:[
     { si:{ romanisation:82, stabilite:48, faveur:48 }, perso:"stratege", expr:"content", ambiance:"solennel",
+      rang:{ niveau:"or", nom:"Modèle démocratique" },
       titre:"La démocratie modèle, un héritage pour les siècles",
       texte:"Tu as donné le pouvoir au peuple, traversé les guerres et la crise sans laisser mourir la démocratie. Vaincue ou non sur les champs de bataille, Athènes lègue au monde sa grande invention : le pouvoir du peuple. Ton nom restera." },
     { si:{ romanisation:60, stabilite:38, faveur:38 }, perso:"conseiller", expr:"content", ambiance:"jour",
+      rang:{ niveau:"argent", nom:"Démocratie accomplie" },
       titre:"Une expérience qui marque l'histoire",
       texte:"La démocratie athénienne a fleuri et, malgré les épreuves et la défaite, l'idée du pouvoir du peuple survit. Quelques fractures demeurent, mais l'essentiel a tenu." },
     { si:{ romanisation:36 }, perso:"conseiller", expr:"neutre", ambiance:"jour",
+      rang:{ niveau:"bronze", nom:"Démocratie fragile" },
       titre:"Une démocratie fragile",
       texte:"Le peuple a goûté au pouvoir, mais l'expérience est restée fragile : tu as parfois reculé, cédé à la démagogie et laissé la cité se déchirer." },
     { si:{}, perso:"citoyen", expr:"severe", ambiance:"jour",
+      rang:{ niveau:"sombre", nom:"L'oligarchie l'emporte" },
       titre:"L'oligarchie l'emporte",
       texte:"Le pouvoir du peuple n'a pas tenu. Écrasée par la guerre et reprise par quelques familles riches, la démocratie athénienne s'est éteinte." }
   ]

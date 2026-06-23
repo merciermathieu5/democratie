@@ -28,6 +28,16 @@ header.tete .sous{font-family:var(--corps);letter-spacing:.02em;font-size:14.5px
 #jauges{position:sticky;top:0;z-index:6;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
   padding:12px 16px;margin:0 auto 18px;max-width:1180px;
   background:rgba(251,247,239,.96);border:2px solid var(--pierre-bord);border-radius:var(--rayon);backdrop-filter:blur(2px)}
+/* mode pression : panneau Sparte à gauche + jauges en 2×2 à droite, à la même hauteur */
+#jauges.avec-menace{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px 16px}
+#jauges.avec-menace .revolte-banner{flex:0 0 100%}
+#jauges.avec-menace .menace-sparte{flex:0 0 clamp(228px,27%,300px);margin:0;display:flex;flex-direction:column;justify-content:center}
+#jauges.avec-menace .jauges-grille{flex:1 1 320px;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 20px;align-content:center}
+@media(max-width:620px){
+  #jauges.avec-menace{flex-direction:column;align-items:stretch}
+  #jauges.avec-menace .menace-sparte{flex:0 0 auto}
+  #jauges.avec-menace .jauges-grille{flex:0 0 auto;align-content:start}
+}
 .jauge{display:flex;gap:9px;align-items:center;min-width:0}
 .jauge .ic{flex:none;width:34px;height:34px;border-radius:8px;background:var(--bronze-clair);border:1.5px solid var(--pierre-bord);
   display:flex;align-items:center;justify-content:center}
@@ -177,6 +187,38 @@ header.tete .sous{font-family:var(--corps);letter-spacing:.02em;font-size:14.5px
   transition:left .55s cubic-bezier(.2,.75,.25,1)}
 @media(max-width:620px){ .axes{grid-template-columns:1fr;gap:12px} }
 @media(prefers-reduced-motion:reduce){ .axe-marqueur{transition:none} }
+
+/* ===== pression de Sparte (climax actes IV-V) ===== */
+.menace-sparte{margin:0 0 12px;padding:9px 13px 11px;border-radius:var(--rayon);border:1.5px solid}
+.menace-tete{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.02em;font-size:13.5px}
+.menace-ic{font-family:var(--display,serif);font-weight:800;font-size:15px;width:23px;height:23px;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;border:2px solid currentColor;border-radius:50%}
+.menace-titre{flex:1}
+.menace-pct{font-variant-numeric:tabular-nums;font-size:13px}
+.menace-rail{height:9px;border-radius:5px;background:rgba(60,30,20,.14);margin:7px 0 5px;overflow:hidden}
+.menace-fill{height:100%;border-radius:5px;transition:width .5s ease}
+.menace-note{font-size:11.5px;font-style:italic;opacity:.9}
+.menace-sparte.niv-bas{color:#7a5a2a;border-color:#caa56a;background:linear-gradient(180deg,#fbf1df,#f2e2c4)}
+.menace-sparte.niv-bas .menace-fill{background:#c79a52}
+.menace-sparte.niv-moyen{color:#9a3b1e;border-color:#d27a4a;background:linear-gradient(180deg,#fbe6da,#f4cfbb)}
+.menace-sparte.niv-moyen .menace-fill{background:linear-gradient(90deg,#d27a4a,#b23a26)}
+.menace-sparte.niv-haut{color:#fff;border-color:#7d1d12;background:linear-gradient(180deg,#9a2417,#6f1409);animation:menacePulse 1.7s ease-in-out infinite}
+.menace-sparte.niv-haut .menace-rail{background:rgba(255,255,255,.20)}
+.menace-sparte.niv-haut .menace-fill{background:linear-gradient(90deg,#ffc05a,#ff6a3c)}
+@keyframes menacePulse{0%,100%{box-shadow:0 0 0 0 rgba(155,36,23,0)}50%{box-shadow:0 0 0 5px rgba(155,36,23,.30)}}
+@media(prefers-reduced-motion:reduce){ .menace-sparte.niv-haut{animation:none} .menace-fill{transition:none} }
+
+/* ===== badge de fin : niveau atteint ===== */
+.badge-rang{display:flex;align-items:center;gap:15px;justify-content:center;
+  margin:6px 0 16px;padding:13px 18px;border-radius:var(--rayon);border:2px solid}
+.badge-medaille{flex:none;width:62px;height:62px}
+.badge-medaille svg{width:100%;height:100%;display:block}
+.badge-niveau{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;opacity:.78}
+.badge-nom{font-family:var(--display,serif);font-weight:700;font-size:20px;line-height:1.15;margin-top:1px}
+.badge-or{color:#9a7a1e;border-color:#cda93f;background:linear-gradient(180deg,#fcf4dc,#f1e4b4)}
+.badge-argent{color:#566571;border-color:#9aa7b3;background:linear-gradient(180deg,#f3f6f9,#e1e7ee)}
+.badge-bronze{color:#8a4f28;border-color:#bd7a44;background:linear-gradient(180deg,#f9ead8,#edd1b3)}
+.badge-sombre{color:#5a4a40;border-color:#9a8674;background:linear-gradient(180deg,#efe7dd,#dcd0c2)}
 
 
 /* ===== document source (à consulter avant de décider) ===== */
